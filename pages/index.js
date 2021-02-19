@@ -11,7 +11,7 @@ export default function Home() {
 
       <main className={styles.main}>
           <h1 className={styles.title}>
-            <a href={'/'}>Welcome to Campus Connect</a>
+            <a href={'/'}>Welcome to Campus Connect 2</a>
           </h1>
 
           <p className={styles.description}>Get started by creating a profile</p>
