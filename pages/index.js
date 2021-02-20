@@ -13,8 +13,7 @@ export default function Home() {
           <h1 className={styles.title}>
             <a href={'/'}>Welcome to Campus Connect</a>
           </h1>
-
-          <p className={styles.description}>Get started by creating a <a href={'/login'}>logging in</a></p>
+          <p className={styles.description}>Get started by <a href={'/login'}>logging in</a></p>
 
           <div className={styles.grid}>
             <a href="/groups" className={styles.card}>

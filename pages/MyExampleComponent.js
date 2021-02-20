@@ -1,7 +1,6 @@
 import axios from "axios"
 
 import React from 'react';
-// import axios from 'axios'
 
 export default class MyExampleComponent extends React.Component
 {
@@ -12,10 +11,10 @@ export default class MyExampleComponent extends React.Component
     }
 
     componentDidMount() {
-        axios.get('http://127.0.0.1:3000/api/db').then(res => {
+        axios.post('http://127.0.0.1:3000/api/login', {username:'bigjohn01', pass:'passschicken'}).then(res => {
             const data = res.data;
             console.log(data);
-            this.setState({ username: data.username });
+            this.setState({ username: data.loggedin });
         })
     }
 
