@@ -11,10 +11,10 @@ export default function Home() {
 
       <main className={styles.main}>
           <h1 className={styles.title}>
-            <a href={'/'}>Welcome to Campus Connect 2</a>
+            <a href={'/'}>Welcome to Campus Connect</a>
           </h1>
 
-          <p className={styles.description}>Get started by creating a profile</p>
+          <p className={styles.description}>Get started by creating a <a href={'/login'}>logging in</a></p>
 
           <div className={styles.grid}>
             <a href="/groups" className={styles.card}>
