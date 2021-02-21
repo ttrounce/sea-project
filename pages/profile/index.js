@@ -1,15 +1,15 @@
-import Head from "next/head";
-import styles from "../../styles/Home.module.css";
+import Head from 'next/head'
+import styles from '../../styles/Home.module.css'
 
 export default function Posts() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Campus Connect</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    return (
+        <div className={styles.container}>
+            <Head>
+                <title>Campus Connect</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
 
-      <main className={styles.main}>
+            <main className={styles.main}>
                 <h1 className={styles.title}>
                     <a href={'/'}>Campus Connect Profile</a>
                 </h1>
@@ -27,8 +27,8 @@ export default function Posts() {
             </main>
 
             <footer className={styles.footer}>
-                Programmed by Brian Evans, Adam Tweedie, Alex Rundle, Toby Trounce and
-                Matthew Hudson
+                Programmed by Brian Evans, Adam Tweedie, Alex Rundle, Toby
+                Trounce and Matthew Hudson
             </footer>
         </div>
     )
