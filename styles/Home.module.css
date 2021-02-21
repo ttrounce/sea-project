@@ -36,13 +36,24 @@
 }
 
 .title a {
-  color: #0070f3;
+  color: #4f9eff;
   text-decoration: none;
 }
+
+.description a {
+  color: #4f9eff;
+}
+
 
 .title a:hover,
 .title a:focus,
 .title a:active {
+  text-decoration: underline;
+}
+
+.description a:hover,
+.description a:focus,
+.description a:active {
   text-decoration: underline;
 }
 
