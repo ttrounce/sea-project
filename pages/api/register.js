@@ -22,44 +22,45 @@ export default async (req, res) => {
     try {
         if (req.method === 'POST') {
             var username = req.body.username
-            var password = req.body.pass
+            var email = req.body.email
 
-            // validate username and password
+            // validate username, email and password.
             if (!validation.validateUsername(username)) {
                 res.status(422).json({ type: 'validation', field: 'username' })
                 return
             }
-            if (!validation.validatePassword(password)) {
+            if (!validation.validateEmail(email)) {
+                res.status(422).json({ type: 'validation', field: 'email' })
+                return
+            }
+            if (!validation.validatePassword(req.body.pass)) {
                 res.status(422).json({ type: 'validation', field: 'password' })
                 return
             }
 
+            // hash the password with bcrypt using 10 rounds
+            var passwordHash = bcrypt.hashSync(req.body.pass, 10)
+
             // prepared statement to input to PostgreSQL
-            const loginStatement = new PreparedStatement({
-                name: 'login-user',
-                text: 'SELECT pass FROM Users WHERE username = $1',
-                values: [username]
+            const registerStatement = new PreparedStatement({
+                name: 'register-user',
+                text:
+                    'INSERT INTO Users (username, pass, email) values ($1, $2, $3)',
+                values: [username, passwordHash, email]
             })
 
             const result = await db
-                .one(loginStatement)
-                .then((result) => {
-                    var hash = result.pass
-                    // If the hash matches, send back a success.
-                    if (bcrypt.compareSync(password, hash)) {
-                        res.status(200).json({
-                            message: 'Successfully logged in'
-                        })
-                    } else {
-                        res.status(401).json({
-                            message: 'Incorrect username or password'
-                        })
-                    }
+                .none(registerStatement)
+                .then((reason) => {
+                    // registered
+                    res.status(200).json({ message: 'Successfully registered' })
                 })
                 .catch((err) => {
-                    if (err.received == 0) {
-                        res.status(401).json({
-                            message: 'Incorrect username or password'
+                    // Error code for when field values are already taken.
+                    if (err.code == 23505) {
+                        res.status(422).json({
+                            type: 'preexisting',
+                            message: 'Username or email is already registered'
                         })
                     } else {
                         res.status(500).json({
@@ -69,6 +70,7 @@ export default async (req, res) => {
                 })
         }
     } catch (error) {
+        console.log(error)
         res.status(500).send({ message: 'Unknown server error', error: error })
     }
 }

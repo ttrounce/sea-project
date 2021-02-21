@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import customStyles from '../../styles/custom.module.css'
 
-import LoginComponent from './LoginComponent'
+import RegisterComponent from './RegisterComponent'
 
 export default function Login() {
     return (
@@ -17,12 +17,12 @@ export default function Login() {
                         <a href={'/'}>Campus Connect</a>
                     </h1>
                     <p className={styles.description}>
-                        Welcome back! <br></br>
-                        Not got an account? <a href={'/register'}>Register now.</a>
+                        Get started by registering! <br></br>
+                        Already got an account? <a href={'/login'}>Log in.</a>
                     </p>
                     <div className={customStyles.card}>
-                        <div className={customStyles.subtitle}>Login</div>
-                        <LoginComponent />
+                        <div className={customStyles.subtitle}>Register</div>
+                        <RegisterComponent />
                     </div>
                 </div>
             </main>
