@@ -17,7 +17,8 @@ export default function Login() {
                         <a href={'/'}>Campus Connect</a>
                     </h1>
                     <p className={styles.description}>
-                        Get started by registering!
+                        Get started by registering! <br></br>
+                        Already got an account? <a href={'/login'}>Log in.</a>
                     </p>
                     <div className={customStyles.card}>
                         <div className={customStyles.subtitle}>Register</div>

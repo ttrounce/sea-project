@@ -16,7 +16,10 @@ export default function Login() {
                     <h1 className={styles.title}>
                         <a href={'/'}>Campus Connect</a>
                     </h1>
-                    <p className={styles.description}>Welcome back!</p>
+                    <p className={styles.description}>
+                        Welcome back! <br></br>
+                        Not got an account? <a href={'/register'}>Register now.</a>
+                    </p>
                     <div className={customStyles.card}>
                         <div className={customStyles.subtitle}>Login</div>
                         <LoginComponent />
