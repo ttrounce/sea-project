@@ -32,3 +32,10 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# vscode & other ides
+/.vscode
+/.idea
+
+# environment variables
+.env
