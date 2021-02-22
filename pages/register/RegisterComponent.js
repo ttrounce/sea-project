@@ -16,7 +16,7 @@ export default class RegisterComponent extends React.Component {
         const password = <span>{data.get('password')}</span>
 
         axios
-            .post('http://127.0.0.1:3000/api/register', {
+            .post(`https://localhost:3000/api/register`, {
                 username: data.get('username'),
                 email: data.get('email'),
                 pass: data.get('password')
