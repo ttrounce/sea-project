@@ -2,9 +2,9 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import customStyles from '../../styles/custom.module.css'
 
-import LoginComponent from './LoginComponent'
+import Login from './LoginComponent'
 
-export default function Login() {
+export default function LoginPage() {
     return (
         <div>
             <Head>
@@ -22,7 +22,7 @@ export default function Login() {
                     </p>
                     <div className={customStyles.card}>
                         <div className={customStyles.subtitle}>Login</div>
-                        <LoginComponent />
+                        <Login/>
                     </div>
                 </div>
             </main>
