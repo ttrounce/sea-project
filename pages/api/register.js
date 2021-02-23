@@ -23,10 +23,20 @@ export default async (req, res) => {
         if (req.method === 'POST') {
             var username = req.body.username
             var email = req.body.email
+            var firstname = req.body.firstname
+            var lastname = req.body.lastname
 
-            // validate username, email and password.
+            // validate username, email, firstname, lastname and password.
             if (!validation.validateUsername(username)) {
                 res.status(422).json({ type: 'validation', field: 'username' })
+                return
+            }
+            if (!validation.validateName(firstname)) {
+                res.status(422).json({ type: 'validation', field: 'firstname' })
+                return
+            }
+            if (!validation.validateName(lastname)) {
+                res.status(422).json({ type: 'validation', field: 'lastname' })
                 return
             }
             if (!validation.validateEmail(email)) {
@@ -45,8 +55,8 @@ export default async (req, res) => {
             const registerStatement = new PreparedStatement({
                 name: 'register-user',
                 text:
-                    'INSERT INTO Users (username, pass, email) values ($1, $2, $3)',
-                values: [username, passwordHash, email]
+                    'INSERT INTO Users (username, firstname, surname, pass, email) values ($1, $2, $3, $4, $5)',
+                values: [username, firstname, lastname, passwordHash, email]
             })
 
             const result = await db
@@ -64,13 +74,13 @@ export default async (req, res) => {
                         })
                     } else {
                         res.status(500).json({
-                            message: 'Unknown server error'
+                            message: 'Unknown server error, please contact an administrator'
                         })
                     }
                 })
         }
     } catch (error) {
         console.log(error)
-        res.status(500).send({ message: 'Unknown server error', error: error })
+        res.status(500).send({ message: 'Unknown server error, please contact an administrator', error: error })
     }
 }

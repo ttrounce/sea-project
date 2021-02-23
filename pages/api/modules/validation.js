@@ -6,6 +6,12 @@ function validateUsername(username) {
     return true
 }
 
+function validateName(name)
+{
+    if(name.length < 1 || name.length > 32) return false
+    return true
+}
+
 function validateEmail(email) {
     if (email.length == 0) return false
     // regex pattern from https://stackoverflow.com/questions/52456065/how-to-format-and-validate-email-node-js
@@ -27,5 +33,6 @@ function validatePassword(pass) {
 module.exports = {
     validateUsername,
     validatePassword,
+    validateName,
     validateEmail
 }
