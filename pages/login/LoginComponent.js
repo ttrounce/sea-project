@@ -16,7 +16,7 @@ export default class LoginComponent extends React.Component {
         const password = <span>{data.get('password')}</span>
 
         axios
-            .post(`http://127.0.0.1:3000/api/login`, {
+            .post(`https://sea-project-c9yt3.ondigitalocean.app/api/login`, {
                 username: data.get('username'),
                 pass: data.get('password')
             })

@@ -26,7 +26,7 @@ export default class RegisterComponent extends React.Component {
         }
 
         axios
-            .post(`http://127.0.0.1:3000/api/register`, {
+            .post(`https://sea-project-c9yt3.ondigitalocean.app/api/register`, {
                 username: username,
                 firstname: firstname,
                 lastname: lastname,
