@@ -38,7 +38,8 @@ export default async (req, res) => {
                 })
                 .catch((err) => {
                     // If userID cannot be found, status 404
-                    if (err.recieved == 0) {
+                    console.log(err)
+                    if (err.code == pgp.errors.queryResultErrorCode.noData) {
                         res.status(404).json({
                             message: 'Could not find requested user'
                         })
@@ -50,6 +51,6 @@ export default async (req, res) => {
                 })
         }
     } catch (error) {
-        res.status(500).send({message: 'Unknown server error', error: error})
+        res.status(500).send({message: 'Unknown server error, please contact an administrator', error: error})
     }
 }
