@@ -10,7 +10,7 @@ export default function LoginPage() {
             <Head>
                 <title>Campus Connect</title>
                 <link rel="icon" href="/favicon.ico" />
-            </Head>
+            </Head>        
             <main className={styles.main}>
                 <div className={styles.container}>
                     <h1 className={styles.title}>
