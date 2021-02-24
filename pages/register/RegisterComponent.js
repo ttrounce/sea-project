@@ -22,7 +22,7 @@ function submit(event, setResponse, setPasswordMessage)
     setPasswordMessage('')
 
     axios
-        .post(`http://127.0.0.1:3000/api/register`, {
+        .post(`${process.env.NEXT_PUBLIC_SELF_URL}/api/login`, {
             username: username,
             firstname: firstname,
             lastname: lastname,

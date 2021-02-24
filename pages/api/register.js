@@ -3,7 +3,6 @@ const { PreparedStatement } = require('pg-promise')
 const bcrypt = require('bcrypt')
 const validation = require('./modules/validation.js')
 
-require('dotenv').config()
 var connectionObject = {
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
