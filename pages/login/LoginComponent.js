@@ -3,8 +3,7 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import customStyles from '../../styles/custom.module.css'
 
-function submit(event, responseFunc)
-{
+function submit(event, responseFunc) {
     event.preventDefault()
     const data = new FormData(event.target)
 
@@ -34,8 +33,7 @@ function submit(event, responseFunc)
         })
 }
 
-export default function Login()
-{
+export default function Login() {
     const [response, setResponse] = useState('')
     return (
         <form onSubmit={(e) => submit(e, setResponse)}>

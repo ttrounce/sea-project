@@ -63,12 +63,16 @@ export default async (req, res) => {
                         })
                     } else {
                         res.status(500).json({
-                            message: 'Unknown server error, please contact an administrator'
+                            message:
+                                'Unknown server error, please contact an administrator'
                         })
                     }
                 })
         }
     } catch (error) {
-        res.status(500).send({ message: 'Unknown server error, please contact an administrator', error: error })
+        res.status(500).send({
+            message: 'Unknown server error, please contact an administrator',
+            error: error
+        })
     }
 }
