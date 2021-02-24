@@ -22,7 +22,7 @@ function submit(event, setResponse, setPasswordMessage)
     setPasswordMessage('')
 
     axios
-        .post(`${process.env.NEXT_PUBLIC_SELF_URL}/api/login`, {
+        .post(`${process.env.NEXT_PUBLIC_SELF_URL}/api/register`, {
             username: username,
             firstname: firstname,
             lastname: lastname,
