@@ -6,7 +6,6 @@ import { getDatabasePool } from '../../database/db-connect'
 
 const PostPage = ({ post }) => {
     const router = useRouter()
-
     return (
         <div className={styles.container}>
             <Head>

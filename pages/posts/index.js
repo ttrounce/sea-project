@@ -3,7 +3,6 @@ import styles from '../../styles/Home.module.css'
 import { getDatabasePool } from '../../database/db-connect'
 
 export default function Posts({ posts }) {
-    console.log(posts)
     return (
         <div className={styles.container}>
             <Head>
@@ -19,7 +18,7 @@ export default function Posts({ posts }) {
                 <p className={styles.description}>
                     View posts from other students
                 </p>
-
+                <a href={'/posts/newpost'}>New post</a>
                 <div className={styles.grid}>
                     {posts.map((post) => (
                         <a

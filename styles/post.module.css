@@ -1,9 +1,8 @@
 article.post {
-    width: 100%;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
     margin: 2rem;
     padding: 3rem;
-    max-width: 60rem;
+    width: 60rem;
 }
 
 article.post > h2.title {
@@ -21,4 +20,29 @@ article.post > h3.subtitle > span.author {
 
 article.post > h3.subtitle > span.date {
     color: #0070f3;
+}
+
+
+input.newtitle {
+    font-size: inherit;
+    width: 100%;
+}
+
+textarea.newcontent {
+    width: 100%;
+    min-height: 10rem;
+    font-size: inherit;
+}
+
+button.submit {
+    font-size: medium;
+    border-radius: 0.25rem;
+    border: 0.1rem solid #0070f3;
+    padding: 0.25rem;
+    background: transparent;
+}
+
+button.submit:hover {
+    background: #4795f3;
+    cursor: pointer;
 }
