@@ -19,7 +19,7 @@ export default function Posts() {
                 </p>
 
                 <div className={styles.grid}>
-                    <a href="" className={styles.card}>
+                    <a href="/posts/jan-exams" className={styles.card}>
                         <h3>The real reason exams are in January</h3>
                         <p>
                             An anonymous student exposes why academics have

@@ -1,0 +1,19 @@
+article.post {
+    width: 100%;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    margin: 2rem;
+    padding: 3rem;
+}
+
+article.post > h2.title {
+    font-weight: lighter;
+    font-size: xx-large;
+}
+
+article.post > h3.author {
+    color: #0070f3;
+}
+
+article.post > h3.date {
+    color: #0070f3;
+}
