@@ -10,7 +10,7 @@ export default function LoginPage() {
             <Head>
                 <title>Campus Connect</title>
                 <link rel="icon" href="/favicon.ico" />
-            </Head>        
+            </Head>
             <main className={styles.main}>
                 <div className={styles.container}>
                     <h1 className={styles.title}>
@@ -18,11 +18,12 @@ export default function LoginPage() {
                     </h1>
                     <p className={styles.description}>
                         Welcome back! <br></br>
-                        Not got an account? <a href={'/register'}>Register now.</a>
+                        Not got an account?{' '}
+                        <a href={'/register'}>Register now.</a>
                     </p>
                     <div className={customStyles.card}>
                         <div className={customStyles.subtitle}>Login</div>
-                        <Login/>
+                        <Login />
                     </div>
                 </div>
             </main>
