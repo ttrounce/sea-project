@@ -3,6 +3,7 @@ article.post {
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
     margin: 2rem;
     padding: 3rem;
+    max-width: 60rem;
 }
 
 article.post > h2.title {
@@ -10,10 +11,14 @@ article.post > h2.title {
     font-size: xx-large;
 }
 
-article.post > h3.author {
+article.post > h3.subtitle {
+    text-align: right;
+}
+
+article.post > h3.subtitle > span.author {
     color: #0070f3;
 }
 
-article.post > h3.date {
+article.post > h3.subtitle > span.date {
     color: #0070f3;
 }
