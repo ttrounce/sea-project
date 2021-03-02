@@ -22,12 +22,12 @@ export default function Posts({ posts }) {
                 <a href={'/posts/newpost'} className={postStyles.newpostlink}>
                     New post
                 </a>
-                <div className={styles.grid}>
+                <div className={postStyles.postsContainer}>
                     {posts.map((post) => (
                         <a
                             key={post.post_id}
                             href={'/posts/' + post.post_id}
-                            className={styles.card}>
+                            className={postStyles.post}>
                             <h3>{post.post_title}</h3>
                             <p>
                                 {post.post_body.slice(0, 50)}

@@ -3,6 +3,7 @@ article.post {
     margin: 2rem;
     padding: 3rem;
     width: 60rem;
+    background: white;
 }
 
 article.post > h2.title {
@@ -22,7 +23,6 @@ article.post > h3.subtitle > span.date {
     color: #0070f3;
 }
 
-
 input.newtitle {
     font-size: inherit;
     width: 100%;
@@ -35,11 +35,14 @@ textarea.newcontent {
 }
 
 button.submit {
-    font-size: medium;
-    border-radius: 0.25rem;
-    border: 0.1rem solid #0070f3;
-    padding: 0.25rem;
-    background: transparent;
+    background-color: #3778C2;
+    border-radius: 0.15rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    color: aliceblue;
+    text-decoration: none;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    border: none;
 }
 
 button.submit:hover {
@@ -48,11 +51,17 @@ button.submit:hover {
 }
 
 a.newpostlink {
-    color: #4f9eff;
+    background-color: #3778C2;
+    border-radius: 0.15rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    color: aliceblue;
+    text-decoration: none;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
 }
 
 a.newpostlink:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 button.delete_button {
@@ -69,4 +78,28 @@ button.delete_button:hover {
     background: crimson;
     cursor: pointer;
     color: whitesmoke;
+}
+
+.postsContainer {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+    grid-auto-rows: 12rem;
+    width: 50rem;
+}
+
+.postsContainer .post {
+    background: aliceblue;
+    padding: 2rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+}
+
+select.newPostGroup {
+    color: #0F2557;
+    background: aliceblue;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 0.15rem rgba(0, 0, 0, 0.2);
+    margin: 0.5rem 0;
 }

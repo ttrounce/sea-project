@@ -26,7 +26,7 @@ export default async (req, res) => {
 }
 
 const submitPost = async (title, content, user, group) => {
-    const { getDatabasePool } = require('../../database/db-connect')
+    const { getDatabasePool } = require('../../../database/db-connect')
     const pool = getDatabasePool()
     console.log('INSERTING:', title, content, user, group)
     const {
