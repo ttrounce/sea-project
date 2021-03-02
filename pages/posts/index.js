@@ -5,44 +5,49 @@ import postStyles from '../../styles/post.module.css'
 
 export default function Posts({ posts }) {
     return (
-        <div className={styles.container}>
-            <Head>
-                <title>Campus Connect</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
+        <>
+            <div className={styles.imageBackground} />
+            <div className={styles.container}>
+                <Head>
+                    <title>Campus Connect</title>
+                    <link rel="icon" href="/favicon.ico" />
+                </Head>
 
-            <main className={styles.main}>
-                <h1 className={styles.title}>
-                    <a href={'/'}>Campus Connect</a>
-                </h1>
+                <main className={styles.main}>
+                    <h1 className={styles.title}>
+                        <a href={'/'}>Campus Connect</a>
+                    </h1>
 
-                <p className={styles.description}>
-                    View posts from other students
-                </p>
-                <a href={'/posts/newpost'} className={postStyles.newpostlink}>
-                    New post
-                </a>
-                <div className={postStyles.postsContainer}>
-                    {posts.map((post) => (
-                        <a
-                            key={post.post_id}
-                            href={'/posts/' + post.post_id}
-                            className={postStyles.post}>
-                            <h3>{post.post_title}</h3>
-                            <p>
-                                {post.post_body.slice(0, 50)}
-                                {post.post_body.length > 50 ? '...' : ''}
-                            </p>
-                        </a>
-                    ))}
-                </div>
-            </main>
+                    <p className={styles.description}>
+                        View posts from other students
+                    </p>
+                    <a
+                        href={'/posts/newpost'}
+                        className={postStyles.newpostlink}>
+                        New post
+                    </a>
+                    <div className={postStyles.postsContainer}>
+                        {posts.map((post) => (
+                            <a
+                                key={post.post_id}
+                                href={'/posts/' + post.post_id}
+                                className={postStyles.post}>
+                                <h3>{post.post_title}</h3>
+                                <p>
+                                    {post.post_body.slice(0, 50)}
+                                    {post.post_body.length > 50 ? '...' : ''}
+                                </p>
+                            </a>
+                        ))}
+                    </div>
+                </main>
 
-            <footer className={styles.footer}>
-                Programmed by Brian Evans, Adam Tweedie, Alex Rundle, Toby
-                Trounce and Matthew Hudson
-            </footer>
-        </div>
+                <footer className={styles.footer}>
+                    Programmed by Brian Evans, Adam Tweedie, Alex Rundle, Toby
+                    Trounce and Matthew Hudson
+                </footer>
+            </div>
+        </>
     )
 }
 

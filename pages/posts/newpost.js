@@ -3,6 +3,9 @@ import styles from '../../styles/Home.module.css'
 import postStyles from '../../styles/post.module.css'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import ReactMarkdown from 'react-markdown'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { vs as SyntaxHighlightStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 const PostPage = ({ groups }) => {
     const [editingTitle, setEditingTitle] = useState(false)
@@ -15,6 +18,17 @@ const PostPage = ({ groups }) => {
     const [currentUserName, setCurrentUsername] = useState('anonymous')
     //this needs updating when cookies/localStorage are working
     // setCurrentUsername(window.localStorage.getItem('fullname') || 'anonymous')
+    const renderers = {
+        code: ({ language, value }) => {
+            return (
+                <SyntaxHighlighter
+                    style={SyntaxHighlightStyle}
+                    language={language}
+                    children={value}
+                />
+            )
+        }
+    }
     return (
         <>
             <div className={styles.imageBackground} />
@@ -80,9 +94,11 @@ const PostPage = ({ groups }) => {
                                     />
                                 </kbd>
                             ) : (
-                                <pre onClick={() => setEditingContent(true)}>
-                                    {content}
-                                </pre>
+                                <div onClick={() => setEditingContent(true)}>
+                                    <ReactMarkdown renderers={renderers}>
+                                        {content}
+                                    </ReactMarkdown>
+                                </div>
                             )}
                         </p>
                         <select
