@@ -60,7 +60,11 @@ const PostPage = ({ post }) => {
 export default PostPage
 
 const deletePost = (post_id) => {
-    fetch('http://localhost:3000/api/post/delete')
+    return fetch('http://localhost:3000/api/posts/delete', {
+        method: 'POST',
+        body: JSON.stringify({ post_id }),
+        headers: { 'Content-type': 'application/json' }
+    })
 }
 
 export async function getStaticProps({ params }) {
