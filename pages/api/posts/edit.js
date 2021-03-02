@@ -19,17 +19,24 @@ export default async (req, res) => {
                     .status(200)
                     .json({ message: 'Successfully submitted post', post_id })
             )
-            .catch((e) => res.status(501).json({ message: e }))
+            .catch((e) =>
+                res.status(500).json({ message: 'Postgres error ' + e.code })
+            )
     }
 }
 
 const submitPost = async (title, content, user, group) => {
     const { getDatabasePool } = require('../../database/db-connect')
     const pool = getDatabasePool()
-    await pool.query(
-        'INSERT INTO posts (posttitle, postcontent, userid, groupid) VALUES ($1, $2, $3, $4) RETURNING id;',
+    console.log('INSERTING:', title, content, user, group)
+    const {
+        rows
+    } = await pool.query(
+        'UPDATE posts (posttitle, postcontent, userid, groupid) VALUES ($1, $2, $3, $4) RETURNING id;',
         [title, content, user, group]
     )
+    console.log(rows)
+    if (rows.length === 1) return rows[0].id
 }
 
 const validateInput = (title, content, user, group) => {

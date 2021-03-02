@@ -3,9 +3,13 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import postStyles from '../../styles/post.module.css'
 import { getDatabasePool } from '../../database/db-connect'
+import { useState } from 'react'
 
 const PostPage = ({ post }) => {
     const router = useRouter()
+    const [currentUserName, setCurrentUsername] = useState('anonymous')
+    //this needs updating when cookies/localStorage are working
+    // setCurrentUsername(window.localStorage.getItem('fullname') || 'anonymous')
     return (
         <div className={styles.container}>
             <Head>
@@ -38,6 +42,11 @@ const PostPage = ({ post }) => {
                                 </span>
                             </h3>
                             <p>{post.body}</p>
+                            <button
+                                className={postStyles.delete_button}
+                                onClick={() => deletePost(post.id)}>
+                                Delete
+                            </button>
                         </>
                     ) : (
                         <h3>Post does not exist</h3>
@@ -49,6 +58,10 @@ const PostPage = ({ post }) => {
 }
 
 export default PostPage
+
+const deletePost = (post_id) => {
+    fetch('http://localhost:3000/api/post/delete')
+}
 
 export async function getStaticProps({ params }) {
     if (isNaN(params.id)) return { props: {} }
@@ -71,7 +84,8 @@ export async function getStaticProps({ params }) {
                 title: post.posttitle,
                 body: post.postcontent,
                 author: user.firstname + ' ' + user.surname,
-                timestamp: post.timestamp.toString()
+                timestamp: post.timestamp.toString(),
+                id: post.id
             }
         }
     }

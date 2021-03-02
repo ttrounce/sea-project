@@ -2,14 +2,19 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import postStyles from '../../styles/post.module.css'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 const PostPage = ({ groups }) => {
     const [editingTitle, setEditingTitle] = useState(false)
     const [editingContent, setEditingContent] = useState(false)
     const [title, setTitle] = useState('Type your title here')
     const [content, setContent] = useState('Type your article content here')
-    const [group, setGroup] = useState(groups[0])
+    const [group, setGroup] = useState(groups[0].id)
     const [errorMessage, setErrorMessage] = useState()
+    const router = useRouter()
+    const [currentUserName, setCurrentUsername] = useState('anonymous')
+    //this needs updating when cookies/localStorage are working
+    // setCurrentUsername(window.localStorage.getItem('fullname') || 'anonymous')
     return (
         <div className={styles.container}>
             <Head>
@@ -50,7 +55,7 @@ const PostPage = ({ groups }) => {
                     <h3 className={postStyles.subtitle}>
                         {'Written by '}
                         <span className={postStyles.author}>
-                            {'currentUser'}
+                            {currentUserName}
                         </span>
                         {' on '}
                         <span className={postStyles.date}>
@@ -88,17 +93,17 @@ const PostPage = ({ groups }) => {
                     <button
                         className={postStyles.submit}
                         onClick={() =>
-                            submitPost(title, content, undefined, group).then(
+                            submitPost(title, content, 95, group).then(
                                 async (r) => {
                                     const message = await r.json()
+                                    console.log(message)
                                     if (r.status !== 200)
                                         setErrorMessage(
                                             'Could not post: ' + message.message
                                         )
                                     else
-                                        alert(
-                                            'Reroute to posts/' +
-                                                message.post_id
+                                        await router.push(
+                                            '/posts/' + message.post_id
                                         )
                                 }
                             )
@@ -115,7 +120,7 @@ const PostPage = ({ groups }) => {
 export default PostPage
 
 const submitPost = (title, content, user, group) => {
-    return fetch('http://localhost:3000/api/post', {
+    return fetch('http://localhost:3000/api/posts/new', {
         method: 'POST',
         body: JSON.stringify({ title, content, user, group }),
         headers: { 'Content-type': 'application/json' }

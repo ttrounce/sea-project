@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import { getDatabasePool } from '../../database/db-connect'
+import postStyles from '../../styles/post.module.css'
 
 export default function Posts({ posts }) {
     return (
@@ -18,7 +19,9 @@ export default function Posts({ posts }) {
                 <p className={styles.description}>
                     View posts from other students
                 </p>
-                <a href={'/posts/newpost'}>New post</a>
+                <a href={'/posts/newpost'} className={postStyles.newpostlink}>
+                    New post
+                </a>
                 <div className={styles.grid}>
                     {posts.map((post) => (
                         <a

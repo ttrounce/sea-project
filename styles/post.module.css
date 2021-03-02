@@ -46,3 +46,27 @@ button.submit:hover {
     background: #4795f3;
     cursor: pointer;
 }
+
+a.newpostlink {
+    color: #4f9eff;
+}
+
+a.newpostlink:hover {
+    text-decoration: underline;
+}
+
+button.delete_button {
+    float: right;
+    color: crimson;
+    font-size: medium;
+    border-radius: 0.25rem;
+    border: 0.1rem solid crimson;
+    padding: 0.25rem;
+    background: transparent;
+}
+
+button.delete_button:hover {
+    background: crimson;
+    cursor: pointer;
+    color: whitesmoke;
+}
