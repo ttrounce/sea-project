@@ -27,14 +27,14 @@ const ProfilePage = ({ user, posts }) => {
 
                     <section className={profileStyles.profile}>
                         <h3>
-                            {user.firstname} {user.surname}
+                            {user?.firstname} {user?.surname}
                         </h3>
-                        <p>Username: {user.username}</p>
+                        <p>Username: {user?.username}</p>
                         <p>
                             User since{' '}
-                            {new Date(user.signup_date).toDateString()}
+                            {new Date(user?.signup_date).toDateString()}
                         </p>
-                        <p>Written {user.noofposts} posts and articles</p>
+                        <p>Written {user?.noofposts} posts and articles</p>
                     </section>
                     <h2>Recent posts by this user</h2>
                     {posts ? (
@@ -52,6 +52,9 @@ const ProfilePage = ({ user, posts }) => {
                                                 }{' '}
                                                 words
                                             </p>
+                                            <a href={'/posts/' + post.id}>
+                                                Read
+                                            </a>
                                         </>
                                     ) : (
                                         <>
@@ -80,6 +83,7 @@ const ProfilePage = ({ user, posts }) => {
 export default ProfilePage
 
 export async function getStaticProps({ params }) {
+    // console.log('request to getStaticProps')
     if (isNaN(params.id)) return { notFound: true }
     const pool = getDatabasePool()
     const { rows: users, rowCount: userCount } = await pool.query(
@@ -100,6 +104,7 @@ export async function getStaticProps({ params }) {
         `,
         [params.id]
     )
+    // console.log(users, userCount)
     if (userCount !== 1) return { notFound: true }
     const { rows: posts } = await pool.query(
         `SELECT *
@@ -110,6 +115,7 @@ export async function getStaticProps({ params }) {
         [params.id]
     )
     const user = users[0]
+    await pool.end()
     return {
         props: {
             user,
@@ -125,6 +131,7 @@ export async function getStaticProps({ params }) {
 export async function getStaticPaths() {
     const pool = getDatabasePool()
     const { rows } = await pool.query('SELECT id::text FROM users')
+    await pool.end()
     return {
         paths: rows.map((row) => ({ params: row })),
         fallback: true
