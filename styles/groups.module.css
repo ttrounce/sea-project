@@ -11,4 +11,28 @@
     padding: 2rem;
     border-radius: 0.25rem;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    transition: transform 300ms ease;
+}
+
+.groupsContainer .group:hover {
+    transform: scale(1.03);
+}
+
+a.newGroupLink {
+    background-color: #3778C2;
+    border-radius: 0.15rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    color: aliceblue;
+    text-decoration: none;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    font-weight: normal;
+}
+
+a.newGroupLink:hover {
+    font-weight: bolder;
+}
+
+div.groupInfoCard {
+
 }

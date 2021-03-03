@@ -21,6 +21,11 @@ export default function Groups({ groups }) {
                     <p className={styles.description}>
                         View student-created groups from different courses
                     </p>
+                    <a
+                        href={'/groups/new'}
+                        className={groupStyles.newGroupLink}>
+                        New group
+                    </a>
 
                     <div className={groupStyles.groupsContainer}>
                         {groups?.map((group) => (
@@ -29,7 +34,10 @@ export default function Groups({ groups }) {
                                 href={'/groups/' + group.id}>
                                 <h3>{group.name}</h3>
                                 <p>{group.description}</p>
-                                <p>{group.num_posts} posts</p>
+                                <p>
+                                    {group.num_posts} article
+                                    {group.num_posts == 1 ? '' : 's'}
+                                </p>
                             </a>
                         ))}
                         {/*below here is only test groups. must be removed*/}
@@ -78,6 +86,7 @@ export async function getStaticProps() {
             FROM groups g,
                  posts p
             WHERE p.groupid = g.id
+              AND LENGTH(p.postcontent) > 250
             GROUP BY g.id, g.groupname, g.groupdesc;
         `
     )
