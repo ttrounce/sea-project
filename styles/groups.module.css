@@ -1,0 +1,14 @@
+.groupsContainer {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+    grid-auto-rows: 12rem;
+    width: 50rem;
+}
+
+.groupsContainer .group {
+    background: aliceblue;
+    padding: 2rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+}
