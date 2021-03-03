@@ -20,6 +20,8 @@
 }
 
 .main {
+  width: 100%;
+  max-width: 60rem;
   padding: 5rem 0;
   flex: 1;
   display: flex;

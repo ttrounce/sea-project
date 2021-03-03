@@ -18,11 +18,12 @@ export default function LoginPage() {
                     </h1>
                     <p className={styles.description}>
                         Welcome back! <br></br>
-                        Not got an account? <a href={'/register'}>Register now.</a>
+                        Not got an account?{' '}
+                        <a href={'/register'}>Register now.</a>
                     </p>
                     <div className={customStyles.card}>
                         <div className={customStyles.subtitle}>Login</div>
-                        <Login/>
+                        <Login />
                     </div>
                 </div>
             </main>

@@ -51,9 +51,11 @@ const PostPage = ({ post }) => {
                                 </h2>
                                 <h3 className={postStyles.subtitle}>
                                     {'Written by '}
-                                    <span className={postStyles.author}>
+                                    <a
+                                        className={postStyles.author}
+                                        href={'/profile/' + post.author_id}>
                                         {post.author}
-                                    </span>
+                                    </a>
                                     {' on '}
                                     <span className={postStyles.date}>
                                         {new Date(
@@ -99,19 +101,19 @@ const deletePost = (post_id) => {
 }
 
 export async function getStaticProps({ params }) {
-    if (isNaN(params.id)) return { props: {} }
+    if (isNaN(params.id)) return { notFound: true }
     const pool = getDatabasePool()
     const {
         rows: posts,
         rowCount: postCount
     } = await pool.query('SELECT * FROM posts WHERE id=$1', [params.id])
-    if (postCount !== 1) return { props: {} }
+    if (postCount !== 1) return { notFound: true }
     const post = posts[0]
     const {
         rows: users,
         rowCount: userCount
     } = await pool.query('SELECT * FROM users WHERE id=$1', [post.userid])
-    if (userCount !== 1) return { props: {} }
+    if (userCount !== 1) return { notFound: true }
     const user = users[0]
     return {
         props: {
@@ -119,6 +121,7 @@ export async function getStaticProps({ params }) {
                 title: post.posttitle,
                 body: post.postcontent,
                 author: user.firstname + ' ' + user.surname,
+                author_id: user.id,
                 timestamp: post.timestamp.toString(),
                 id: post.id
             }

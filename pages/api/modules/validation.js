@@ -6,9 +6,8 @@ function validateUsername(username) {
     return true
 }
 
-function validateName(name)
-{
-    if(name.length < 1 || name.length > 32) return false
+function validateName(name) {
+    if (name.length < 1 || name.length > 32) return false
     return true
 }
 
