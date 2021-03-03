@@ -1,0 +1,13 @@
+section.profile {
+    width: 100%;
+    background: aliceblue;
+    padding: 2rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+}
+
+div.recentPostsContainer {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+}
