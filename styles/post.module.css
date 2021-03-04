@@ -65,8 +65,28 @@ a.newpostlink:hover {
     text-decoration: none;
 }
 
+div.button_row {
+    display: flex;
+    justify-content: flex-end;
+}
+
+button.edit_button {
+    color: #3778C2;
+    font-size: medium;
+    border-radius: 0.25rem;
+    border: 0.1rem solid #3778C2;
+    padding: 0.25rem;
+    background: transparent;
+    margin-right: 00.5rem;
+}
+
+button.edit_button:hover {
+    background: #3778C2;
+    cursor: pointer;
+    color: whitesmoke;
+}
+
 button.delete_button {
-    float: right;
     color: crimson;
     font-size: medium;
     border-radius: 0.25rem;
