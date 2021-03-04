@@ -2,8 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import customStyles from '../../styles/custom.module.css'
 
-function submit(event, setResponse, setPasswordMessage)
-{
+function submit(event, setResponse, setPasswordMessage) {
     event.preventDefault()
     const data = new FormData(event.target)
     // Encased in JSX to autosanitize.
@@ -14,8 +13,7 @@ function submit(event, setResponse, setPasswordMessage)
     const firstname = data.get('firstname')
     const lastname = data.get('lastname')
 
-    if(password !== confirmPassword)
-    {
+    if (password !== confirmPassword) {
         setPasswordMessage('Your passwords do not match')
         return
     }
@@ -43,13 +41,19 @@ function submit(event, setResponse, setPasswordMessage)
                             setResponse('Please enter a valid email')
                             break
                         case 'firstname':
-                            setResponse('Please enter a first name of length 1 to 32')
+                            setResponse(
+                                'Please enter a first name of length 1 to 32'
+                            )
                             break
                         case 'lastname':
-                            setResponse('Please enter a last name of length 1 to 32')
+                            setResponse(
+                                'Please enter a last name of length 1 to 32'
+                            )
                             break
                         case 'password':
-                            setResponse('Please enter a valid password of length 6-32')
+                            setResponse(
+                                'Please enter a valid password of length 6-32'
+                            )
                             break
                     }
                 } else if (err.response.data.type == 'preexisting') {
@@ -61,8 +65,7 @@ function submit(event, setResponse, setPasswordMessage)
         })
 }
 
-export default function Register()
-{
+export default function Register() {
     const [response, setResponse] = useState('')
     const [passwordMessage, setPasswordMessage] = useState('')
 
