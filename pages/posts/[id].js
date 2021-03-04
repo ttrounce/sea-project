@@ -66,19 +66,24 @@ const PostPage = ({ post }) => {
                                 <ReactMarkdown renderers={renderers}>
                                     {post.body}
                                 </ReactMarkdown>
-                                <button
-                                    className={postStyles.delete_button}
-                                    onClick={() => {
-                                        const confirmation = confirm(
-                                            'Are you sure you want to delete your post?'
-                                        )
-                                        if (confirmation)
-                                            deletePost(post.id).then(() =>
-                                                router.push('/posts')
+                                <div className={postStyles.button_row}>
+                                    <button className={postStyles.edit_button}>
+                                        Edit
+                                    </button>
+                                    <button
+                                        className={postStyles.delete_button}
+                                        onClick={() => {
+                                            const confirmation = confirm(
+                                                'Are you sure you want to delete your post?'
                                             )
-                                    }}>
-                                    Delete
-                                </button>
+                                            if (confirmation)
+                                                deletePost(post.id).then(() =>
+                                                    router.push('/posts')
+                                                )
+                                        }}>
+                                        Delete
+                                    </button>
+                                </div>
                             </>
                         ) : (
                             <h3>Post does not exist</h3>
