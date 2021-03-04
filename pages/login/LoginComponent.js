@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
 import customStyles from '../../styles/custom.module.css'
 
 function submit(event, responseFunc) {
@@ -8,7 +7,7 @@ function submit(event, responseFunc) {
     const data = new FormData(event.target)
 
     axios
-        .post(`http://127.0.0.1:3000/api/login`, {
+        .post(`${process.env.NEXT_PUBLIC_SELF_URL}/api/login`, {
             username: data.get('username'),
             pass: data.get('password')
         })
