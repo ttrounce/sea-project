@@ -138,6 +138,7 @@ const PostPage = ({ groups }) => {
                             Submit {content.length < 250 ? 'post' : 'article'}{' '}
                             for review
                         </button>
+                        <a href={'/posts'} className={postStyles.cancelpostlink}>Cancel</a>
                         <p style={{ color: 'crimson' }}>{errorMessage}</p>
                     </article>
                 </main>

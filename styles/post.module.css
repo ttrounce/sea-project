@@ -65,6 +65,21 @@ a.newpostlink:hover {
     text-decoration: none;
 }
 
+a.cancelpostlink {
+    color: aliceblue;
+    float: right;
+    background-color: #DC143C;
+    border-radius: 0.15rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    text-decoration: none;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+}
+
+a.cancelpostlink:hover {
+    text-decoration: none;
+}
+
 div.button_row {
     display: flex;
     justify-content: flex-end;
