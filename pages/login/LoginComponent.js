@@ -1,53 +1,42 @@
-import axios from 'axios'
+import { signIn } from 'next-auth/client'
+import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import customStyles from '../../styles/custom.module.css'
 
-function submit(event, responseFunc) {
-    event.preventDefault()
-    const data = new FormData(event.target)
-
-    axios
-        .post(`${process.env.NEXT_PUBLIC_SELF_URL}/api/login`, {
-            username: data.get('username'),
-            pass: data.get('password')
-        })
-        .then((res) => {
-            responseFunc('Successfully logged in')
-        })
-        .catch((err) => {
-            if (err.response.status == 422) {
-                if (err.response.data.type == 'validation') {
-                    switch (err.response.data.field) {
-                        case 'username':
-                            responseFunc('Please enter a valid username')
-                            break
-                        case 'password':
-                            responseFunc('Please enter a valid password')
-                            break
-                    }
-                }
-            } else {
-                responseFunc(err.response.data.message)
-            }
-        })
-}
-
 export default function Login() {
+    const router = useRouter()
     const [response, setResponse] = useState('')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+        
+        const res = signIn('username-login', { callbackUrl: `${process.env.NEXT_PUBLIC_SELF_URL}/login`, redirect: false, username, password })
+        res.then((res) => {
+            if(res.status == 401)
+                setResponse('Username or password is incorrect')
+            if(res.status == 200)
+                router.push('/')
+        })
+    }
+
     return (
-        <form onSubmit={(e) => submit(e, setResponse)}>
+        <form onSubmit={(e) => onSubmit(e)}>
             <div>
                 <input
                     name="username"
                     className={customStyles.input}
-                    placeholder="Username"></input>
+                    placeholder="Username"
+                    onChange={(e) => setUsername(e.target.value)}></input>
             </div>
             <div>
                 <input
                     name="password"
                     type="password"
                     className={customStyles.input}
-                    placeholder="Password"></input>
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}></input>
             </div>
             <div>
                 <button className={customStyles.button}>Login</button>
