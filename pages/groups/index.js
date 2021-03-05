@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import groupStyles from '../../styles/groups.module.css'
+import Navbar from '../components/Navbar/Navbar'
 
 export default function Groups({ groups }) {
     return (
@@ -11,7 +12,7 @@ export default function Groups({ groups }) {
                     <title>Campus Connect</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-
+                <Navbar />
                 <main className={styles.main}>
                     <h1 className={styles.title}>
                         {' '}

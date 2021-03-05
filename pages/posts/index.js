@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import { getDatabasePool } from '../../database/db-connect'
 import postStyles from '../../styles/post.module.css'
+import Navbar from "../components/Navbar/Navbar"
 
 export default function Posts({ posts }) {
     return (
@@ -12,7 +13,7 @@ export default function Posts({ posts }) {
                     <title>Campus Connect</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-
+                <Navbar />
                 <main className={styles.main}>
                     <h1 className={styles.title}>
                         <a href={'/'}>Campus Connect</a>
@@ -24,8 +25,9 @@ export default function Posts({ posts }) {
                     <a
                         href={'/posts/newpost'}
                         className={postStyles.newpostlink}>
-                        New post
+                        New Post
                     </a>
+                    <p></p>
                     <div className={postStyles.postsContainer}>
                         {posts.map((post) => (
                             <a
