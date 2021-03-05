@@ -67,7 +67,10 @@ const PostPage = ({ post }) => {
                                     {post.body}
                                 </ReactMarkdown>
                                 <div className={postStyles.button_row}>
-                                    <button className={postStyles.edit_button}>
+                                    <button className={postStyles.edit_button}
+                                        onClick={() => {
+                                            router.push('/posts/newpost/?post_id=' + post.id)
+                                        }}>
                                         Edit
                                     </button>
                                     <button

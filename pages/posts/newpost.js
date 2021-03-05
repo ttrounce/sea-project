@@ -6,8 +6,9 @@ import { useRouter } from 'next/router'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vs as SyntaxHighlightStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import axios from 'axios'
 
-const PostPage = ({ groups }) => {
+const PostPage = ({ groups, post_id }) => {
     const [editingTitle, setEditingTitle] = useState(false)
     const [editingContent, setEditingContent] = useState(false)
     const [title, setTitle] = useState('Type your title here')
@@ -18,6 +19,21 @@ const PostPage = ({ groups }) => {
     const [currentUserName, setCurrentUsername] = useState('anonymous')
     //this needs updating when cookies/localStorage are working
     // setCurrentUsername(window.localStorage.getItem('fullname') || 'anonymous')
+
+    if (post_id) {
+        //fetch(`${process.env.NEXT_PUBLIC_SELF_URL}/api/posts/get_post?post_id=${post_id}`)
+        axios.get(`${process.env.NEXT_PUBLIC_SELF_URL}/api/posts/get_post`,{​​
+            params: {​​post_id: post_id}​​
+            }​​)
+        .then( async(r) => {
+            if (r.status === 200) {
+                const j = await r.json()
+                setTitle(j.posttitle)
+                setContent(j.postcontent)
+            }
+        }).catch(e => console.log(e))
+    }
+
     const renderers = {
         code: ({ language, value }) => {
             return (
@@ -165,7 +181,8 @@ export async function getStaticProps() {
     )
     return {
         props: {
-            groups
+            groups,
+            post_id: 34
         }
     }
 }
