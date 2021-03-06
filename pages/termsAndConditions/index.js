@@ -4,13 +4,13 @@ import termsStyles from '../../styles/terms.module.css'
 
 export default function Terms() {
     return (
-        <div>
+        <div className={styles.container}>
             <Head>
                 <title>Campus Connect</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.main}>
-                <div className={styles.container}>
+                <div>
                     <h1 className={styles.title}>
                         <a href={'/'}>Campus Connect</a>
                     </h1>
