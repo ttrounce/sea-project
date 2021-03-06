@@ -13,22 +13,23 @@ export default function Login() {
                 <title>Campus Connect</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            <Navbar/>git
             <div className={styles.main}>
-                    <h1 className={styles.title}>
-                        <a href={'/'}>Campus Connect</a>
-                    </h1>
-                    <p className={styles.description}>
-                        Get started by registering! <br></br>
-                        Already got an account? <a href={'/login'}>Log in.</a>
-                    </p>
-                    <div className={customStyles.card}>
-                        <div className={customStyles.subtitle}>Register</div>
-                        <RegisterComponent />
-                    </div>
-                    <p className={termsStyles.smallLink}>
-                        <a href={'/termsAndConditions'}>Terms and Conditions.</a>
-                    </p>
+                <h1 className={styles.title}>
+                    <a href={'/'}>Campus Connect</a>
+                </h1>
+                <p className={styles.description}>
+                    Get started by registering! <br></br>
+                    Already got an account? <a href={'/login'}>Log in.</a>
+                </p>
+                <div className={customStyles.card}>
+                    <div className={customStyles.subtitle}>Register</div>
+                    <RegisterComponent />
                 </div>
+                <p className={termsStyles.smallLink}>
+                    <a href={'/termsAndConditions'}>Terms and Conditions.</a>
+                </p>
             </div>
+        </div>
     )
 }
