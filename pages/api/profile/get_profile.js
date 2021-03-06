@@ -25,7 +25,8 @@ export default async (req, res) => {
             const getUserStatement = new PreparedStatement({
                 name: 'get-user-details',
                 text: `SELECT u.username, u.firstname, u.surname, u.email, u.noofpoints, r.rolename, COUNT(p.id) AS noofposts
-                       FROM Users u, Roles r, Posts p WHERE u.id = $1 AND r.roleid = u.roleid AND p.userid = u.id
+                       FROM Users u, Roles r, Posts p 
+                       WHERE u.id = $1 AND r.roleid = u.roleid AND p.userid = u.id
                        GROUP BY u.username, u.firstname, u.surname, u.email, u.noofpoints, r.rolename;`,
                 values: [userid]
             })

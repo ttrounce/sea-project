@@ -1,8 +1,14 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import groupStyles from '../../styles/groups.module.css'
+import Navbar from '../components/Navbar/Navbar'
+import { useSession } from 'next-auth/client'
 
 export default function Groups({ groups }) {
+    const [session, loading] = useSession()
+    if (loading) {
+        return <></>
+    }
     return (
         <>
             <div className={styles.imageBackground} />
@@ -11,7 +17,14 @@ export default function Groups({ groups }) {
                     <title>Campus Connect</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-
+                <>
+                    {!session && <>
+                        <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'Log In', url: '/login'}, {title: 'Register', url: '/register'}]}/>
+                    </>}
+                    {session && <>
+                        <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'My Account', url: '/profile'}]}/>
+                    </>}
+                </>
                 <main className={styles.main}>
                     <h1 className={styles.title}>
                         {' '}

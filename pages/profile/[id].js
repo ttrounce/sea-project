@@ -3,6 +3,8 @@ import { getDatabasePool } from '../../database/db-connect'
 import styles from '../../styles/Home.module.css'
 import profileStyles from '../../styles/profile.module.css'
 import Head from 'next/head'
+import Navbar from "../components/Navbar/Navbar"
+import { signOut } from 'next-auth/client'
 
 const ProfilePage = ({ user, posts }) => {
     const router = useRouter()
@@ -14,7 +16,7 @@ const ProfilePage = ({ user, posts }) => {
                     <title>Campus Connect</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-
+                <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'My Account', url: '/profile/'}]}/>
                 <main className={styles.main}>
                     <h1 className={styles.title}>
                         <a href={'/'}>Campus Connect Profile</a>
@@ -35,6 +37,19 @@ const ProfilePage = ({ user, posts }) => {
                             {new Date(user?.signup_date).toDateString()}
                         </p>
                         <p>Written {user?.noofposts} posts and articles</p>
+
+                        <button 
+                            className={profileStyles.delete_button}
+                            onClick={() => {
+                                const confirmation = confirm('Are you sure you want to delete your account?')
+                                if (confirmation) {
+                                    deleteUser(user?.id).then(() =>
+                                        router.push('/profile')
+                                    )
+                                }
+                            }}>
+                            Delete Account
+                        </button>
                     </section>
                     <h2>Recent posts by this user</h2>
                     {posts ? (
@@ -82,6 +97,14 @@ const ProfilePage = ({ user, posts }) => {
 }
 export default ProfilePage
 
+const deleteUser = (userid) => {
+    return fetch(`${process.env.NEXT_PUBLIC_SELF_URL}/api/profile/delete_profile`, {
+        method: 'POST',
+        body: JSON.stringify({ userid }),
+        headers: { 'Content-type': 'application/json'}
+    })
+}
+
 export async function getStaticProps({ params }) {
     // console.log('request to getStaticProps')
     if (isNaN(params.id)) return { notFound: true }
@@ -89,6 +112,7 @@ export async function getStaticProps({ params }) {
     const { rows: users, rowCount: userCount } = await pool.query(
         `
             SELECT u.username,
+                   u.id,
                    u.firstname,
                    u.surname,
                    u.email,
@@ -100,7 +124,7 @@ export async function getStaticProps({ params }) {
                  Roles r
             WHERE u.id = $1
               AND r.roleid = u.roleid
-            GROUP BY u.username, u.firstname, u.surname, u.email, u.signup_date, r.rolename;
+            GROUP BY u.username, u.id, u.firstname, u.surname, u.email, u.signup_date, r.rolename;
         `,
         [params.id]
     )

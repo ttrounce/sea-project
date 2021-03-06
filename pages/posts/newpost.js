@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vs as SyntaxHighlightStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { useSession } from 'next-auth/client'
 
 const PostPage = ({ groups }) => {
     const [editingTitle, setEditingTitle] = useState(false)
@@ -15,6 +16,7 @@ const PostPage = ({ groups }) => {
     const [group, setGroup] = useState(groups[0].id)
     const [errorMessage, setErrorMessage] = useState()
     const router = useRouter()
+    const [session, loading] = useSession()
     const [currentUserName, setCurrentUsername] = useState('anonymous')
     //this needs updating when cookies/localStorage are working
     // setCurrentUsername(window.localStorage.getItem('fullname') || 'anonymous')
