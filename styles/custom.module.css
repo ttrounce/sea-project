@@ -13,7 +13,7 @@
 {
     margin-top: 20px;
     padding: 6px 25px;
-    background: #4f9eff;
+    background: #3778C2;
     border: none;
     color: white;
     border-radius: 2px;
@@ -22,12 +22,12 @@
 .button:hover
 {
     cursor: pointer;
-    background: #4795f3; 
+    background: #4285d1; 
 }
 
 .button:active
 {
-    background: #277be2;
+    background: #4e97eb;
 }
 
 

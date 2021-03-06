@@ -25,9 +25,9 @@ export default function Groups({ groups }) {
                     <a
                         href={'/groups/new'}
                         className={groupStyles.newGroupLink}>
-                        New group
+                        New Group
                     </a>
-
+                    <p></p>
                     <div className={groupStyles.groupsContainer}>
                         {groups?.map((group) => (
                             <a
