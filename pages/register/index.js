@@ -13,9 +13,7 @@ export default function Login() {
                 <title>Campus Connect</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-<<<<<<< HEAD
-            <main className={styles.main}>
-                <div className={styles.container}>
+            <div className={styles.main}>
                     <h1 className={styles.title}>
                         <a href={'/'}>Campus Connect</a>
                     </h1>
@@ -30,22 +28,7 @@ export default function Login() {
                     <p className={termsStyles.smallLink}>
                         <a href={'/termsAndConditions'}>Terms and Conditions.</a>
                     </p>
-=======
-            <Navbar />
-            <div className={styles.main}>
-                <h1 className={styles.title}>
-                    <a href={'/'}>Campus Connect</a>
-                </h1>
-                <p className={styles.description}>
-                    Get started by registering! <br></br>
-                    Already got an account? <a href={'/login'}>Log in.</a>
-                </p>
-                <div className={customStyles.card}>
-                    <div className={customStyles.subtitle}>Register</div>
-                    <RegisterComponent />
->>>>>>> b51ba1f345ea8daeb6a9bb9de951d7a9022f49d9
                 </div>
             </div>
-        </div>
     )
 }
