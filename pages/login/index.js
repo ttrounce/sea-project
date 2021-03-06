@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import customStyles from '../../styles/custom.module.css'
+import Navbar from "../components/Navbar/Navbar"
 
 import { signOut, useSession } from 'next-auth/client'
 
@@ -13,11 +14,12 @@ export default function LoginPage() {
         return <></>
     }
     return (
-        <div>
+        <div className={styles.container}>
             <Head>
                 <title>Campus Connect</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            <Navbar />
             <main className={styles.main}>
                 <div className={styles.container}>
                     <h1 className={styles.title}>
@@ -43,7 +45,7 @@ export default function LoginPage() {
                         </>}
                     </>
                 </div>
-            </main>
+            </div>
         </div>
     )
 }

@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import Navbar from '../components/Navbar/Navbar'
 
 const NewGroup = ({ groups }) => {
     const [name, setName] = useState()
@@ -16,7 +17,7 @@ const NewGroup = ({ groups }) => {
                     <title>Campus Connect</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-
+                <Navbar />
                 <main className={styles.main}>
                     <h1 className={styles.title}>
                         {' '}
