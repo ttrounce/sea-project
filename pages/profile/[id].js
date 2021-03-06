@@ -3,6 +3,7 @@ import { getDatabasePool } from '../../database/db-connect'
 import styles from '../../styles/Home.module.css'
 import profileStyles from '../../styles/profile.module.css'
 import Head from 'next/head'
+import Navbar from "../components/Navbar/Navbar"
 
 const ProfilePage = ({ user, posts }) => {
     const router = useRouter()
@@ -14,7 +15,7 @@ const ProfilePage = ({ user, posts }) => {
                     <title>Campus Connect</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-
+                <Navbar />
                 <main className={styles.main}>
                     <h1 className={styles.title}>
                         <a href={'/'}>Campus Connect Profile</a>

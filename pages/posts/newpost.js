@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import postStyles from '../../styles/post.module.css'
+import Navbar from "../components/Navbar/Navbar"
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import ReactMarkdown from 'react-markdown'
@@ -38,7 +39,7 @@ const PostPage = ({ groups }) => {
                     <title>Campus Connect</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-
+                <Navbar />
                 <main className={styles.main}>
                     <h1 className={styles.title}>
                         <a href={'/posts'}>Campus Connect Posts</a>
