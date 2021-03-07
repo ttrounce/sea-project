@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import customStyles from '../../styles/custom.module.css'
+import termsStyles from '../../styles/terms.module.css'
 import Navbar from "../components/Navbar/Navbar"
 import { useSession } from 'next-auth/client'
 
@@ -40,6 +41,9 @@ export default function Login() {
                         <RegisterComponent />
                     </div>
                 </div>
+                <p className={termsStyles.smallLink}>
+                    <a href={'/termsAndConditions'}>Terms and Conditions.</a>
+                </p>
             </div>
         </>
     )
