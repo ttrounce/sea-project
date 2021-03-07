@@ -15,7 +15,7 @@ const ProfilePage = ({ user, posts }) => {
                     <title>Campus Connect</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-                <Navbar />
+                <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'My Account', url: '/profile/'}]}/>
                 <main className={styles.main}>
                     <h1 className={styles.title}>
                         <a href={'/'}>Campus Connect Profile</a>

@@ -1,9 +1,8 @@
 import React, { Component, useState, useEffect } from 'react';
-import { MenuItems } from "./MenuItems";
 import Head from 'next/head';
 import navbarStyles from '../../../styles/navbar.module.css';
 
-export default function Navbar()
+export default function Navbar(props)
 {
     const [clicked, setClicked] = useState(false)
 
@@ -14,6 +13,20 @@ export default function Navbar()
 
     const onClick = () => {
         setClicked(!clicked)
+    }
+
+
+    const menuContent = new Array()
+    var link
+    if (props.content.length > 5) {
+        for (link = 0; link < 5; link++) {
+            menuContent.push(props.content[link])
+        }
+    }
+    else {
+        for (link = 0; link < props.content.length; link++) {
+            menuContent.push(props.content[link])
+        }
     }
 
     return (
@@ -27,10 +40,10 @@ export default function Navbar()
                     <i className={clicked ? 'fas fa-times ' + navbarStyles.fa_times : 'fas fa-bars ' + navbarStyles.fa_bars}></i>
                 </div>
                 <ul className={clicked ? navbarStyles.navmenu_active : navbarStyles.navmenu}>
-                    {MenuItems.map((item, index) => {
+                    {menuContent.map((item, index) => {
                         return (
                             <li key={index} style={{listStyleType: 'none'}}>
-                                <a className={item.cName} href={item.url}>
+                                <a className={navbarStyles.navlinks} href={item.url}>
                                     {item.title}
                                 </a>
                             </li>
