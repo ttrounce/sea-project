@@ -5,6 +5,7 @@ import customStyles from '../../styles/custom.module.css'
 import { signOut, useSession } from 'next-auth/client'
 
 import Login from './LoginComponent'
+import Navbar from '../components/Navbar/Navbar'
 
 export default function LoginPage() {
     const [session, loading] = useSession()

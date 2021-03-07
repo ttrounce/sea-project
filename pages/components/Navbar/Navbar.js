@@ -1,5 +1,4 @@
 import React, { Component, useState, useEffect } from 'react';
-import { MenuItems } from "./MenuItems";
 import Head from 'next/head';
 import navbarStyles from '../../../styles/navbar.module.css';
 
