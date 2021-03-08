@@ -67,9 +67,13 @@ const PostPage = ({ post }) => {
                                     {post.body}
                                 </ReactMarkdown>
                                 <div className={postStyles.button_row}>
-                                    <button className={postStyles.edit_button}
+                                    <button
+                                        className={postStyles.edit_button}
                                         onClick={() => {
-                                            router.push('/posts/newpost/?post_id=' + post.id)
+                                            router.push(
+                                                '/posts/newpost/?post_id=' +
+                                                    post.id
+                                            )
                                         }}>
                                         Edit
                                     </button>
@@ -123,6 +127,7 @@ export async function getStaticProps({ params }) {
     } = await pool.query('SELECT * FROM users WHERE id=$1', [post.userid])
     if (userCount !== 1) return { notFound: true }
     const user = users[0]
+    await pool.end()
     return {
         props: {
             post: {
@@ -133,13 +138,15 @@ export async function getStaticProps({ params }) {
                 timestamp: post.timestamp.toString(),
                 id: post.id
             }
-        }
+        },
+        revalidate: 5
     }
 }
 
 export async function getStaticPaths() {
     const pool = getDatabasePool()
     const { rows } = await pool.query('SELECT CAST(id AS text) FROM posts')
+    await pool.end()
     return {
         paths: rows.map((row) => ({ params: row })),
         fallback: true

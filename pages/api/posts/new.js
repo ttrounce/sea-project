@@ -28,14 +28,15 @@ export default async (req, res) => {
 const submitPost = async (title, content, user, group) => {
     const { getDatabasePool } = require('../../../database/db-connect')
     const pool = getDatabasePool()
-    console.log('INSERTING:', title, content, user, group)
+    // console.log('INSERTING:', title, content, user, group)
     const {
         rows
     } = await pool.query(
         'INSERT INTO posts (posttitle, postcontent, userid, groupid) VALUES ($1, $2, $3, $4) RETURNING id;',
         [title, content, user, group]
     )
-    console.log(rows)
+    // console.log(rows)
+    await pool.end()
     if (rows.length === 1) return rows[0].id
 }
 

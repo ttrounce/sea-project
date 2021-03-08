@@ -51,7 +51,7 @@ export default function Posts({ posts }) {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const pool = getDatabasePool()
     const { rows: posts, rowCount: postCount } = await pool.query(`
         SELECT p.id                            AS post_id,
@@ -64,7 +64,7 @@ export async function getStaticProps() {
         ORDER BY timestamp DESC
         LIMIT 8;
     `)
-
+    await pool.end()
     return {
         props: {
             posts: posts
