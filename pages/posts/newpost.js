@@ -2,11 +2,13 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import postStyles from '../../styles/post.module.css'
 import { useEffect, useState } from 'react'
+import Navbar from "../components/Navbar/Navbar"
 import { useRouter } from 'next/router'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vs as SyntaxHighlightStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import axios from 'axios'
+import { useSession } from 'next-auth/client'
 
 const PostPage = ({ groups }) => {
     const {
@@ -21,6 +23,7 @@ const PostPage = ({ groups }) => {
     const [errorMessage, setErrorMessage] = useState()
     const [successMessage, setSuccessMessage] = useState()
     const router = useRouter()
+    const [session, loading] = useSession()
     const [currentUserName, setCurrentUsername] = useState('anonymous')
     //this needs updating when cookies/localStorage are working
     // setCurrentUsername(window.localStorage.getItem('fullname') || 'anonymous')
@@ -61,7 +64,7 @@ const PostPage = ({ groups }) => {
                     <title>Campus Connect</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-
+                <Navbar />
                 <main className={styles.main}>
                     <h1 className={styles.title}>
                         <a href={'/posts'}>Campus Connect Posts</a>

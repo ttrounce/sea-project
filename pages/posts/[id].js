@@ -4,12 +4,15 @@ import styles from '../../styles/Home.module.css'
 import postStyles from '../../styles/post.module.css'
 import { getDatabasePool } from '../../database/db-connect'
 import { useState } from 'react'
+import Navbar from "../components/Navbar/Navbar"
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vs as SyntaxHighlightStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { useSession } from 'next-auth/client'
 
 const PostPage = ({ post }) => {
     const router = useRouter()
+    const [session, loading] = useSession()
     const [currentUserName, setCurrentUsername] = useState('anonymous')
     //this needs updating when cookies/localStorage are working
     // setCurrentUsername(window.localStorage.getItem('fullname') || 'anonymous')
@@ -32,7 +35,7 @@ const PostPage = ({ post }) => {
                     <title>Campus Connect</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-
+                <Navbar />
                 <main className={styles.main}>
                     <h1 className={styles.title}>
                         <a href={'/posts'}>Campus Connect Posts</a>
