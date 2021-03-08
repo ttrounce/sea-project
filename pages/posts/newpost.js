@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import postStyles from '../../styles/post.module.css'
 import { useEffect, useState } from 'react'
-import Navbar from "../components/Navbar/Navbar"
+import Navbar from '../../components/Navbar/Navbar'
 import { useRouter } from 'next/router'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -22,11 +22,12 @@ const PostPage = ({ groups }) => {
     const [group, setGroup] = useState(groups[0].id)
     const [errorMessage, setErrorMessage] = useState()
     const [successMessage, setSuccessMessage] = useState()
+    const [currentUserName, setCurrentUsername] = useState()
     const router = useRouter()
     const [session, loading] = useSession()
-    const [currentUserName, setCurrentUsername] = useState('anonymous')
-    //this needs updating when cookies/localStorage are working
-    // setCurrentUsername(window.localStorage.getItem('fullname') || 'anonymous')
+    useEffect(() => {
+        if (!loading) setCurrentUsername(session.user.username)
+    }, [loading])
     useEffect(() => setGroup(group_id ?? groups[0].id), [group_id])
     useEffect(() => {
         if (isEditing) {
@@ -64,7 +65,14 @@ const PostPage = ({ groups }) => {
                     <title>Campus Connect</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-                <Navbar />
+                <Navbar
+                    content={[
+                        { title: 'Posts', url: '/posts' },
+                        { title: 'Groups', url: '/groups' },
+                        { title: 'Log In', url: '/login' },
+                        { title: 'Register', url: '/register' }
+                    ]}
+                />
                 <main className={styles.main}>
                     <h1 className={styles.title}>
                         <a href={'/posts'}>Campus Connect Posts</a>
