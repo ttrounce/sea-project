@@ -1,6 +1,8 @@
-## API - get_profile.js
+# API - get_profile.js
+
 ---
-### Request:
+
+## Request
 
 ```json
 POST /api/get_profile HTTP/1.1
@@ -10,9 +12,13 @@ content-type: application/json
     "userid": "exampleid"
 }
 ```
+
 ---
-### Response:
+
+## Response
+
 - `200`: Successful Retrieval of User details
+
     ```json
     {
         "username": "exampleusername",
@@ -24,13 +30,17 @@ content-type: application/json
         "noofposts": "integer"
     }
     ```
+
 - `404`: Invalid user ID supplied
+
     ```json
     {
         "message": "Could not find requested user"
     }
     ```
+
 - `500`: Server or Database Error
+
     ```json
     {
         "message": "Unknown server error, please contact an administrator"

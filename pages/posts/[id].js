@@ -14,6 +14,8 @@ const PostPage = ({ post }) => {
     const router = useRouter()
     const [currentUserName, setCurrentUsername] = useState()
     const [session, loading] = useSession()
+    const [reportButtonText, setReportButtonText] = useState('Report')
+
     useEffect(() => {
         if (!loading) setCurrentUsername(session?.user?.name)
     }, [loading])
@@ -23,7 +25,7 @@ const PostPage = ({ post }) => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    post_id: post.id,
+                    post_id: post?.id,
                     username: currentUserName,
                     timestamp: Date.now()
                 })
@@ -79,7 +81,9 @@ const PostPage = ({ post }) => {
                                     {'Written by '}
                                     <a
                                         className={postStyles.author}
-                                        href={'/profile/' + post.author_id}>
+                                        href={
+                                            '/profile/' + post.author_username
+                                        }>
                                         {post.author}
                                     </a>
                                     {' on '}
@@ -93,6 +97,27 @@ const PostPage = ({ post }) => {
                                     {post.body}
                                 </ReactMarkdown>
                                 <div className={postStyles.button_row}>
+                                    <button
+                                        className={postStyles.report_button}
+                                        onClick={() => {
+                                            if (reportButtonText == 'Report') {
+                                                reportPost(
+                                                    post.id,
+                                                    currentUserName
+                                                ).then(async (r) => {
+                                                    if (r.status === 200) {
+                                                        setReportButtonText(
+                                                            'Reported'
+                                                        )
+                                                    } else {
+                                                        const message = await r.json()
+                                                        alert(message.message)
+                                                    }
+                                                })
+                                            }
+                                        }}>
+                                        {reportButtonText}
+                                    </button>
                                     <button
                                         className={postStyles.edit_button}
                                         onClick={() => {
@@ -131,10 +156,21 @@ const PostPage = ({ post }) => {
 export default PostPage
 
 const deletePost = (post_id) => {
-    return fetch('http://localhost:3000/api/posts/delete', {
+    return fetch('/api/posts/delete', {
         method: 'POST',
         body: JSON.stringify({ post_id }),
         headers: { 'Content-type': 'application/json' }
+    })
+}
+
+const reportPost = (post_id, currentUserName) => {
+    return fetch('/api/posts/report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            post_id: post_id,
+            username: currentUserName
+        })
     })
 }
 
@@ -161,6 +197,7 @@ export async function getStaticProps({ params }) {
                 body: post.postcontent,
                 author: user.firstname + ' ' + user.surname,
                 author_id: user.id,
+                author_username: user.username,
                 timestamp: post.timestamp.toString(),
                 id: post.id
             }
