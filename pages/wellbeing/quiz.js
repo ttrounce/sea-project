@@ -10,6 +10,10 @@ export default function Wellbeing() {
     if (loading) {
         return <></>
     }
+
+    /**Below are the set of questions, and their corresponding answers, with the related health score, for the well-being 
+     * assessment
+     */
     const questions = [
         {
             questionText: "Recently, I've been feeling optimistic about the future",
@@ -103,6 +107,7 @@ export default function Wellbeing() {
 		},
     ];
 
+    // Getter and Setter methods
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [showScore, setShowScore] = useState(false)
     const [score, setScore] = useState(0);
@@ -121,7 +126,7 @@ export default function Wellbeing() {
         }
 
     const nextQuestion = currentQuestion + 1;
-        
+
     if (nextQuestion < questions.length) {
         setCurrentQuestion(nextQuestion);
     } else {
@@ -129,6 +134,7 @@ export default function Wellbeing() {
     }
     }
     
+    // Returns a well-being message dependent on the value of score, forumlated from the users answers.
     const getScoreDescription = (score_) => {
         if (score_ < 15 ) {
             return <div><h4>Your well-being score implies to us that you may be having a hard time,  please reach out and get in touch. Here are some support helplines to start with:</h4><li>
@@ -176,11 +182,13 @@ export default function Wellbeing() {
                                 <div className={quizStyles.question}>{questions[currentQuestion].questionText}</div>
                             </div>
 					<div className='answers'>
-						{
+						{   
+                            // Create a new array populated with the results of calling answerBtn on every element in the calling array
                             questions[currentQuestion].answerOptions.map(answer => (<button className={quizStyles.answerBtn} onClick={()=>{handleAnswerOptionClick(answer.healthPoints)}}>{answer.answerText}</button>))
                         }
                         <br></br>
-                        {
+                        {   
+                            // Display the score description, dependent on score.
                             showScore ? <p className={quizStyles.question}> {getScoreDescription(score)} </p> : <> </>
                         }
 					</div>
