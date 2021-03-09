@@ -14,7 +14,7 @@ const PostPage = ({ post }) => {
     const router = useRouter()
     const [currentUserName, setCurrentUsername] = useState()
     const [session, loading] = useSession()
-    const [reportButtonText, setReportButtonText] = useState("Report")
+    const [reportButtonText, setReportButtonText] = useState('Report')
     useEffect(() => {
         if (!loading) setCurrentUsername(session?.user?.name)
     }, [loading])
@@ -24,7 +24,7 @@ const PostPage = ({ post }) => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    post_id: post.id,
+                    post_id: post?.id,
                     username: currentUserName,
                     timestamp: Date.now()
                 })
@@ -80,7 +80,9 @@ const PostPage = ({ post }) => {
                                     {'Written by '}
                                     <a
                                         className={postStyles.author}
-                                        href={'/profile/' + post.author_id}>
+                                        href={
+                                            '/profile/' + post.author_username
+                                        }>
                                         {post.author}
                                     </a>
                                     {' on '}
@@ -97,19 +99,23 @@ const PostPage = ({ post }) => {
                                     <button
                                         className={postStyles.report_button}
                                         onClick={() => {
-                                            if (reportButtonText == "Report") {
-                                                reportPost(post.id, currentUserName)
-                                                .then(async r => {
+                                            if (reportButtonText == 'Report') {
+                                                reportPost(
+                                                    post.id,
+                                                    currentUserName
+                                                ).then(async (r) => {
                                                     if (r.status === 200) {
-                                                        setReportButtonText("Reported")
+                                                        setReportButtonText(
+                                                            'Reported'
+                                                        )
                                                     } else {
                                                         const message = await r.json()
                                                         alert(message.message)
                                                     }
-                                                })  
-                                            }  
+                                                })
+                                            }
                                         }}>
-                                        { reportButtonText }
+                                        {reportButtonText}
                                     </button>
                                     <button
                                         className={postStyles.edit_button}
@@ -190,6 +196,7 @@ export async function getStaticProps({ params }) {
                 body: post.postcontent,
                 author: user.firstname + ' ' + user.surname,
                 author_id: user.id,
+                author_username: user.username,
                 timestamp: post.timestamp.toString(),
                 id: post.id
             }

@@ -1,8 +1,5 @@
 export default async (req, res) => {
-    const validationError = validateRequest(
-        req.body.post_id,
-        req.body.username,
-    )
+    const validationError = validateRequest(req.body.post_id, req.body.username)
     const notReported = await checkReport(req.body.post_id, req.body.username)
     if (validationError) res.status(404).json({ message: validationError })
     else {
@@ -19,11 +16,11 @@ export default async (req, res) => {
                             message: 'Error inserting report'
                         })
                 })
-            .catch((error) =>
-                res.status(500).json({
-                    message: 'Error reporting post: ' + error.code
-                })
-            )
+                .catch((error) =>
+                    res.status(500).json({
+                        message: 'Error reporting post: ' + error.code
+                    })
+                )
         } else {
             res.status(400).json({
                 message: 'You have already reported this post!'
@@ -42,7 +39,7 @@ const checkReport = async (post_id, username) => {
             SELECT * FROM reported_posts
             WHERE username = $1
             AND post_id = $2`,
-            [username, post_id]
+        [username, post_id]
     )
     await pool.end()
     if (rowCount === 0) {
@@ -50,7 +47,6 @@ const checkReport = async (post_id, username) => {
     } else {
         return false
     }
-        
 }
 
 // Inserts report into the database
