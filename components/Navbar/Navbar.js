@@ -18,14 +18,17 @@ export default function Navbar(props)
 
     const menuContent = new Array()
     var link
-    if (props.content.length > 5) {
-        for (link = 0; link < 5; link++) {
-            menuContent.push(props.content[link])
+    if(props && props.content)
+    {
+        if (props.content.length > 5) {
+            for (link = 0; link < 5; link++) {
+                menuContent.push(props.content[link])
+            }
         }
-    }
-    else {
-        for (link = 0; link < props.content.length; link++) {
-            menuContent.push(props.content[link])
+        else {
+            for (link = 0; link < props.content.length; link++) {
+                menuContent.push(props.content[link])
+            }
         }
     }
 
