@@ -12,6 +12,7 @@ export default function Profile() {
     const [session, loading] = useSession()
     const [user, setUserData] = useState()
     const [posts, setUserPosts] = useState()
+    const [profilePicture, setProfilePicture] = useState()
     const router = useRouter()
 
     useEffect(() => {
@@ -49,15 +50,21 @@ export default function Profile() {
                 .catch((err) => {
                     console.log(err)
                 })
+            
+            axios
+                .post('/api/proxy/profile_picture', {username: session.user.name})
+                .then((res) => {
+                    setProfilePicture(res.data.results[0].picture.large)
+                })
+                .catch(err => {
+                    console.log("error: " + err)
+                })
         }
-    }, [])
-    
-    if (loading) {
-        return <>Loading...</>
-    }
+    }, [session, user])
 
-    if(session && (!user || !posts)) {
-        return <>Retrieving user data...</>
+
+    if(loading || session && (!user)) {
+        return <></>
     }
 
     return (
@@ -105,28 +112,37 @@ export default function Profile() {
                     </Head>
                     <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'My Account', url: '/profile/'}]}/>
                     <main className={styles.main}>
-                        <p className={styles.description}>
-                            View your profile or browse other students public
-                            profiles
-                        </p>
-
+                        <h2>Your profile</h2>
                         <section className={profileStyles.profile}>
-                            <h3>
-                                {user?.firstname} {user?.surname}
-                            </h3>
-                            <p>Username: {user?.username}</p>
-                            <p>
-                                User since{' '}
-                                {new Date(user?.signup_date).toDateString()}
-                            </p>
-                            <p>Written {user?.noofposts} posts and articles</p>
+                            <div style={{alignItems: 'center', display:'flex'}}>
+                                {profilePicture ? (
+                                    <img style={{objectFit: 'cover', marginRight: '2em', boxShadow: '0px 0px 0.2em gray', borderRadius: '50%'}} src={profilePicture}></img>
+                                ) : (
+                                    <svg style={{objectFit: 'cover', marginRight: '2em', boxShadow: '0px 0px 0.2em gray', borderRadius: '50%'}} width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+                                        <g>
+                                            <ellipse cx="64.18181" cy="109.04545" fill="#000000" id="svg_5" rx="43.36364" ry="43.36364" stroke="#000000" strokeWidth="5"/>
+                                            <ellipse cx="64.1875" cy="31.10795" fill="#000000" id="svg_7" rx="22.44887" ry="22.44887" stroke="#000000" strokeWidth="5"/>
+                                        </g>
+                                    </svg>
+                                )}
+                                <div>
+                                    <h3>
+                                        {user?.firstname} {user?.surname}
+                                    </h3>
+                                    <p>Username: {user?.username}</p>
+                                    <p>
+                                        User since{' '}
+                                        {new Date(user?.signup_date).toDateString()}
+                                    </p>
+                                    <p>Written {user?.noofposts} posts and articles</p>
+                                </div>
+                            </div>
 
                             <button 
                                 className={profileStyles.delete_button}
                                 onClick={() => {
-                                    const confirmation = confirm('Are you sure you want to delete your account?')
+                                    const confirmation = confirm('Are you sure you want to delete your account? This action is irreversible.')
                                     if (confirmation) {
-                                        console.log(user)
                                         deleteUser(user?.id).then(() => {
                                             signOut()
                                             router.push('/')
@@ -135,9 +151,20 @@ export default function Profile() {
                                 }}>
                                 Delete Account
                             </button>
+                            <button 
+                                className={profileStyles.logout_button}
+                                onClick={() => {
+                                    const confirmation = confirm('Are you want to log out?')
+                                    if (confirmation) {
+                                        signOut()
+                                        router.push('/')
+                                    }
+                                }}>
+                                Log out
+                            </button>
                         </section>
-                        <h2>Recent posts by this user</h2>
-                        {posts ? (
+                        <h2>Your recent posts</h2>
+                        {posts && posts.length > 0 ? (
                             <div className={profileStyles.recentPostsContainer}>
                                 {posts.map((post) => (
                                     <section className={profileStyles.profile}>
@@ -167,7 +194,7 @@ export default function Profile() {
                             </div>
                         ) : (
                             <section className={profileStyles.profile}>
-                                <h3>No recent posts by this user</h3>
+                                <h3>No recent posts</h3>
                             </section>
                         )}
                     </main>
