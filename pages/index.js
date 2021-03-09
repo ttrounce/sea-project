@@ -17,13 +17,13 @@ export default function Home() {
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
                 <>
-                        {!session && <>
-                            <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'Log In', url: '/login'}, {title: 'Register', url: '/register'}]}/>
-                        </>}
-                        {session && <>
-                            <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'My Account', url: '/profile'}]}/>
-                        </>}
-                    </>
+                    {!session && <>
+                        <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'Log In', url: '/login'}, {title: 'Register', url: '/register'}]}/>
+                    </>}
+                    {session && <>
+                        <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'My Account', url: '/profile'}]}/>
+                    </>}
+                </>
                 <main className={styles.main}>
                     <h1 className={styles.title}>
                         <a href={'/'}>Welcome to Campus Connect</a>
