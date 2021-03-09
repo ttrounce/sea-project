@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import Head from 'next/head';
-import navbarStyles from '../../../styles/navbar.module.css';
+import navbarStyles from '../../styles/navbar.module.css';
 
 export default function Navbar(props)
 {

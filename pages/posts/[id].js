@@ -4,7 +4,7 @@ import styles from '../../styles/Home.module.css'
 import postStyles from '../../styles/post.module.css'
 import { getDatabasePool } from '../../database/db-connect'
 import { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar/Navbar'
+import Navbar from '../../components/Navbar/Navbar'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vs as SyntaxHighlightStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism'
@@ -15,6 +15,7 @@ const PostPage = ({ post }) => {
     const [currentUserName, setCurrentUsername] = useState()
     const [session, loading] = useSession()
     const [reportButtonText, setReportButtonText] = useState('Report')
+
     useEffect(() => {
         if (!loading) setCurrentUsername(session?.user?.name)
     }, [loading])

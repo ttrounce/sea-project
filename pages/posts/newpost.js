@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import postStyles from '../../styles/post.module.css'
 import { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar/Navbar'
+import Navbar from '../../components/Navbar/Navbar'
 import { useRouter } from 'next/router'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -31,7 +31,6 @@ const PostPage = ({ groups }) => {
     useEffect(() => setGroup(group_id ?? groups[0].id), [group_id])
     useEffect(() => {
         if (isEditing) {
-            // fetch(`/api/posts/get_post?post_id=${post_id}`)
             axios
                 .get(`/api/posts/get_post`, { params: { post_id } })
                 .then(async (r) => {

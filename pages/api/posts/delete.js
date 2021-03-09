@@ -22,6 +22,7 @@ export default async (req, res) => {
 const deletePost = async (post_id) => {
     const { getDatabasePool } = require('../../../database/db-connect')
     const pool = getDatabasePool()
+
     const {
         rows
     } = await pool.query(
