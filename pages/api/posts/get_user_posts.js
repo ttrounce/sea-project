@@ -24,24 +24,21 @@ export default async (req, res) => {
             // Prepared statement to get user details
             const getUserStatement = new PreparedStatement({
                 name: 'get-user-details',
-                text: `SELECT Users.username, Users.firstname, Users.surname, Users.email, Users.signup_date, Roles.rolename, COUNT(Posts.id) AS noofposts
-                       FROM Users
-                       LEFT JOIN Posts ON Users.id = Posts.userid
-                       LEFT JOIN Roles ON Roles.roleid = Users.roleid
-                       WHERE Users.id = $1
-                       GROUP BY Users.username, Users.firstname, Users.surname, Users.email, Users.signup_date, Roles.rolename;`,
+                text: `SELECT Posts.posttitle, Posts.postcontent, Posts.timestamp
+                       FROM Posts
+                       LEFT JOIN Users ON Users.id = Posts.userid
+                       WHERE Users.id = $1;`,
                 values: [userid]
             })
 
             const result = await db
-                .one(getUserStatement)
+                .any(getUserStatement)
                 .then((result) => {
                     // If a result is found, send status 200 with relevant info in payload
                     res.status(200).json(result)
                 })
                 .catch((err) => {
                     // If userID cannot be found, status 404
-                    console.log(err)
                     if (err.code == pgp.errors.queryResultErrorCode.noData) {
                         res.status(404).json({
                             message: 'Could not find requested user'

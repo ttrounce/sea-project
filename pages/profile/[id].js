@@ -8,6 +8,12 @@ import { signOut } from 'next-auth/client'
 
 const ProfilePage = ({ user, posts }) => {
     const router = useRouter()
+    if(!user) {
+        return (
+            <></>
+        )
+    }
+
     return (
         <>
             <div className={styles.imageBackground} />
@@ -18,10 +24,6 @@ const ProfilePage = ({ user, posts }) => {
                 </Head>
                 <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'My Account', url: '/profile/'}]}/>
                 <main className={styles.main}>
-                    <h1 className={styles.title}>
-                        <a href={'/'}>Campus Connect Profile</a>
-                    </h1>
-
                     <p className={styles.description}>
                         View your profile or browse other students public
                         profiles
@@ -37,19 +39,6 @@ const ProfilePage = ({ user, posts }) => {
                             {new Date(user?.signup_date).toDateString()}
                         </p>
                         <p>Written {user?.noofposts} posts and articles</p>
-
-                        <button 
-                            className={profileStyles.delete_button}
-                            onClick={() => {
-                                const confirmation = confirm('Are you sure you want to delete your account?')
-                                if (confirmation) {
-                                    deleteUser(user?.id).then(() =>
-                                        router.push('/profile')
-                                    )
-                                }
-                            }}>
-                            Delete Account
-                        </button>
                     </section>
                     <h2>Recent posts by this user</h2>
                     {posts ? (
@@ -97,13 +86,14 @@ const ProfilePage = ({ user, posts }) => {
 }
 export default ProfilePage
 
-const deleteUser = (userid) => {
-    return fetch(`${process.env.NEXT_PUBLIC_SELF_URL}/api/profile/delete_profile`, {
-        method: 'POST',
-        body: JSON.stringify({ userid }),
-        headers: { 'Content-type': 'application/json'}
-    })
-}
+// Not used at the moment
+// const deleteUser = (userid) => {
+//     return fetch(`${process.env.NEXT_PUBLIC_SELF_URL}/api/profile/delete_profile`, {
+//         method: 'POST',
+//         body: JSON.stringify({ userid }),
+//         headers: { 'Content-type': 'application/json'}
+//     })
+// }
 
 export async function getStaticProps({ params }) {
     // console.log('request to getStaticProps')

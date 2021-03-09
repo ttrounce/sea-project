@@ -18,16 +18,16 @@ const db = pgp(connectionObject)
 
 export default async (req, res) => {
     if (req.method === 'POST') {
-        const validationError = validateInput(req.body.user_id)
+        const validationError = validateInput(req.body.userid)
         if (validationError) {
             res.status(400).json({ message: validationError })
         } else {
-            deleteUser(req.body.userid)
+            deleteUser(req.body.userid, req, res)
         }
     }
 }
 
-const deleteUser = async (post_id) => {
+const deleteUser = async (post_id, req, res) => {
     try {
         var userid = req.body.userid
         
@@ -48,9 +48,10 @@ const deleteUser = async (post_id) => {
                 }
             })
             .catch((err) =>
-            res.status(500).json({ message: 'Server Error: ' + err.code })
+                res.status(500).json({ message: 'Server Error: ' + err.code })
             )
     } catch (error) {
+        console.log(error)
         return res.status(500).send({
             message: 'Unknown server error, please contact administrator',
             error: error
