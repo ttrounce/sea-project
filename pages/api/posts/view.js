@@ -1,10 +1,10 @@
 export default async (req, res) => {
-    console.log(
-        'Request received for post view',
-        req.body,
-        req.params,
-        req.query
-    )
+    // console.log(
+    //     'Request received for post view',
+    //     req.body,
+    //     req.params,
+    //     req.query
+    // )
     const validationError = validateRequest(
         req.body.post_id,
         req.body.username,
@@ -14,7 +14,7 @@ export default async (req, res) => {
     else {
         viewPost(req.body.post_id, req.body.username, req.body.timestamp)
             .then((view_id) => {
-                console.log('View ID:', view_id)
+                // console.log('View ID:', view_id)
                 if (view_id)
                     res.status(200).json({
                         view_id,
@@ -44,7 +44,7 @@ const viewPost = async (post_id, username, timestamp) => {
             RETURNING view_id`,
         [username, new Date(timestamp), post_id]
     )
-    console.log('Rows', rows)
+    // console.log('Rows', rows)
     await pool.end()
     if (rows.length !== 1) return
     return rows[0].view_id
