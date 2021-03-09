@@ -11,13 +11,17 @@ export default function Login() {
 
     const onSubmit = (e) => {
         e.preventDefault()
-        
-        const res = signIn('username-login', { callbackUrl: `${process.env.NEXT_PUBLIC_SELF_URL}/login`, redirect: false, username, password })
+
+        const res = signIn('username-login', {
+            callbackUrl: `${process.env.NEXT_PUBLIC_SELF_URL}/login`,
+            redirect: false,
+            username,
+            password
+        })
         res.then((res) => {
-            if(res.status == 401)
+            if (res.status == 401)
                 setResponse('Username or password is incorrect')
-            if(res.status == 200)
-                router.push('/')
+            if (res.status == 200) router.push('/')
         })
     }
 

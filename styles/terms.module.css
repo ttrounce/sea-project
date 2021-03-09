@@ -1,25 +1,25 @@
-.smallLink a{
-    color: #0F2557
+.smallLink a {
+    color: #0f2557;
 }
-  
+
 .smallLink a:hover,
 .smallLink a:focus,
 .smallLink a:active {
     text-decoration: underline;
 }
-  
+
 .smallLink {
     text-align: center;
 }
-  
+
 .smallLink {
     line-height: 1.5;
     font-size: 1rem;
 }
 
 .description a {
-    color: #0F2557;
-  }
+    color: #0f2557;
+}
 
 .description {
     text-align: start;
@@ -44,10 +44,8 @@
     border: 1px solid #eaeaea;
     border-radius: 10px;
     transition: color 0.15s ease, border-color 0.15s ease;
-  }
-
+}
 
 .subtitle {
     font-size: 22.5px;
 }
-

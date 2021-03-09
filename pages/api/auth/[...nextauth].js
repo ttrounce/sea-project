@@ -1,11 +1,10 @@
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
+import validation from '../modules/validation'
 
 const pgp = require('pg-promise')({ noWarnings: true })
 const { PreparedStatement } = require('pg-promise')
 const bcrypt = require('bcrypt')
-
-import validation from '../modules/validation'
 
 const connectionObject = {
     user: process.env.DB_USERNAME,
@@ -21,10 +20,9 @@ const connectionObject = {
 
 /**
  * Returns the user credentials, and returns the information for the session
- * @param {Object} credentials 
+ * @param {Object} credentials
  */
-async function checkCredentials(credentials)
-{
+async function checkCredentials(credentials) {
     const db = pgp(connectionObject)
     const username = credentials.username
     const password = credentials.password
@@ -45,12 +43,13 @@ async function checkCredentials(credentials)
     })
 
     // Send the statement off,
-    return await db.one(loginStatement)
+    return await db
+        .one(loginStatement)
         .then((result) => {
             // If the hash matches, send back a success.
             if (bcrypt.compareSync(password, result.pass)) {
                 // Return the session user object
-                return {name: username, email: result.email}
+                return { name: username, email: result.email }
             } else {
                 // Login rejected.
                 return null
@@ -69,17 +68,20 @@ export default NextAuth({
             name: '',
             credentials: {
                 username: {
-                    label: 'Username', type: 'text', placeholder: 'Username'
+                    label: 'Username',
+                    type: 'text',
+                    placeholder: 'Username'
                 },
                 password: {
-                    label: 'Password', type: 'password'
+                    label: 'Password',
+                    type: 'password'
                 }
             },
             pages: {
                 signIn: '/login'
             },
             authorize: async (credentials) => {
-                return checkCredentials(credentials);
+                return checkCredentials(credentials)
             }
         })
     ]

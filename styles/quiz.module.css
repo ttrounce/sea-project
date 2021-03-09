@@ -1,6 +1,6 @@
 .questionNum {
-    color: #0F2557;
-  }
+    color: #0f2557;
+}
 
 .questionNum {
     text-align: start;
@@ -12,8 +12,8 @@
 }
 
 .question {
-    color: #0F2557;
-  }
+    color: #0f2557;
+}
 
 .question {
     text-align: start;
@@ -26,16 +26,16 @@
 }
 
 button.answerBtn {
-    background-color: #3778C2;
+    background-color: #3778c2;
     border-radius: 0.15rem;
     padding: 0.5rem 1rem;
-    margin: 0.5rem 0;
-    margin-right: 1rem;
+    margin: 0.5rem 1rem 0.5rem 0;
     color: aliceblue;
     text-decoration: none;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
     border: none;
     font-size: inherit;
+    cursor: pointer;
 }
 
 button.answerBtn:hover {
@@ -54,5 +54,4 @@ button.answerBtn:hover {
     text-decoration: none;
     border: 1px solid #eaeaea;
     border-radius: 10px;
-  }
-
+}

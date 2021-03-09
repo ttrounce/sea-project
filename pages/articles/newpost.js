@@ -140,7 +140,28 @@ const PostPage = ({ groups }) => {
                                 onClick={() => setEditingContent(true)}
                                 className={postStyles.articleContent}>
                                 <ReactMarkdown renderers={renderers}>
-                                    {content || defaultContent}
+                                    {content ||
+                                        `
+### Write your new article here!
+
+You can use markdown in your post for styling.
+
+You can use ** for **bold**, and * for *italics*.
+
+Backticks (\`) for inline code :
+
+\`var x = 5\`
+
+Triple tilde (\~\~\~) for code blocks with syntax highlighting
+~~~python
+def python():
+    print("Hello World!")
+~~~
+#### \`####\`  hashes for headings
+
+\`![title](image/url.jpeg)\` for images
+
+                                        `}
                                 </ReactMarkdown>
                             </div>
                         )}
@@ -241,12 +262,3 @@ export async function getStaticProps() {
         }
     }
 }
-
-const defaultContent = `
-Click here to start typing your post 
-
-Try to keep it less than 250 characters to classify as a post. 
-
-You can use emojis 🧡 to make your post more engaging!
-
-                                        `

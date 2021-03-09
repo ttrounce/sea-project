@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
+import groupStyles from '../../styles/groups.module.css'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Navbar from '../../components/Navbar/Navbar'
@@ -16,19 +17,36 @@ const NewGroup = ({ groups }) => {
     }
     return (
         <>
-            <div className={styles.imageBackground} />
+            <div className={styles.constructionBackground} />
             <div className={styles.container}>
                 <Head>
                     <title>Campus Connect</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
                 <>
-                    {!session && <>
-                        <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'Log In', url: '/login'}, {title: 'Register', url: '/register'}]}/>
-                    </>}
-                    {session && <>
-                        <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'My Account', url: '/profile'}]}/>
-                    </>}
+                    {!session && (
+                        <>
+                            <Navbar
+                                content={[
+                                    { title: 'Posts', url: '/posts' },
+                                    { title: 'Groups', url: '/groups' },
+                                    { title: 'Log In', url: '/login' },
+                                    { title: 'Register', url: '/register' }
+                                ]}
+                            />
+                        </>
+                    )}
+                    {session && (
+                        <>
+                            <Navbar
+                                content={[
+                                    { title: 'Posts', url: '/posts' },
+                                    { title: 'Groups', url: '/groups' },
+                                    { title: 'My Account', url: '/profile' }
+                                ]}
+                            />
+                        </>
+                    )}
                 </>
                 <main className={styles.main}>
                     <h1 className={styles.title}>
@@ -39,20 +57,18 @@ const NewGroup = ({ groups }) => {
                     <p className={styles.description}>
                         Create a new group for articles
                     </p>
-                    <div>
-                        <p>
-                            This styling is a work in progress, but the page is
-                            functional
-                        </p>
+                    <div className={groupStyles.newGroupInputs}>
                         <input
                             placeholder={'Group name...'}
                             value={name}
                             onChange={(v) => setName(v.target.value)}
+                            className={groupStyles.newGroupName}
                         />
                         <textarea
                             placeholder={'Group description'}
                             value={description}
                             onChange={(v) => setDescription(v.target.value)}
+                            className={groupStyles.newGroupDescription}
                         />
                         <button
                             onClick={() =>
@@ -67,7 +83,8 @@ const NewGroup = ({ groups }) => {
                                         }
                                     }
                                 )
-                            }>
+                            }
+                            className={groupStyles.submitNewGroup}>
                             Submit new group for review
                         </button>
                         <p style={{ color: 'crimson' }}>{errorMessage}</p>

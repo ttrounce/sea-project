@@ -21,12 +21,13 @@ export default async (req, res) => {
         if (req.method === 'POST') {
             var username = req.body.username
             var email = req.body.email
-            
-            const getIdStatement = new PreparedStatement ({
+
+            const getIdStatement = new PreparedStatement({
                 name: 'get-user-id',
                 text: `SELECT u.id
                        FROM Users u
-                       WHERE u.username = $1 AND u.email = $2`,
+                       WHERE u.username = $1
+                         AND u.email = $2`,
                 values: [username, email]
             })
 
@@ -48,8 +49,7 @@ export default async (req, res) => {
                     }
                 })
         }
-    }
-    catch (error) {
+    } catch (error) {
         res.status(500).send({
             message: 'Unknown server error, please contact an administrator',
             error: error

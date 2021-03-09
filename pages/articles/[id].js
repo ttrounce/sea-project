@@ -26,14 +26,14 @@ const PostPage = ({ post }) => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     post_id: post?.id,
-                    username: session?.user?.name,
+                    username: currentUserName,
                     timestamp: Date.now()
                 })
             })
                 .then((r) => console.log('pageview response', r.status)) // page view
                 .catch((error) => console.error('Page view failed:', error))
         }
-    }, [loading])
+    }, [currentUserName])
     const renderers = {
         code: ({ language, value }) => {
             return (
@@ -47,7 +47,7 @@ const PostPage = ({ post }) => {
     }
     return (
         <>
-            <div className={styles.amoryBackground} />
+            <div className={styles.laverBackground} />
             <div className={styles.container}>
                 <Head>
                     <title>Campus Connect</title>
@@ -74,7 +74,7 @@ const PostPage = ({ post }) => {
                 )}
                 <main className={styles.main}>
                     <h1 className={styles.title}>
-                        <a href={'/posts'}>Campus Connect Posts</a>
+                        <a href={'/articles'}>Campus Connect Articles</a>
                     </h1>
 
                     <p className={styles.description}>
@@ -104,12 +104,17 @@ const PostPage = ({ post }) => {
                                         ).toDateString()}
                                     </span>
                                 </h3>
+                                <p className={postStyles.longViewCount}>
+                                    Viewed a total of {post.views || 0} time
+                                    {post.views != 1 ? 's' : ''} by{' '}
+                                    {post.uniqueViews} unique user
+                                    {post.uniqueViews != 1 ? 's' : ''}
+                                </p>
                                 <div className={postStyles.articleContent}>
                                     <ReactMarkdown renderers={renderers}>
                                         {post.body}
                                     </ReactMarkdown>
                                 </div>
-
                                 <div className={postStyles.button_row}>
                                     <button
                                         className={postStyles.report_button}
@@ -138,7 +143,7 @@ const PostPage = ({ post }) => {
                                             className={postStyles.edit_button}
                                             onClick={() => {
                                                 router.push(
-                                                    '/posts/newpost/?post_id=' +
+                                                    '/articles/newpost/?post_id=' +
                                                         post.id
                                                 )
                                             }}>
@@ -157,7 +162,7 @@ const PostPage = ({ post }) => {
                                                     deletePost(
                                                         post.id
                                                     ).then(() =>
-                                                        router.push('/posts')
+                                                        router.push('/articles')
                                                     )
                                             }}>
                                             Delete
@@ -211,6 +216,23 @@ export async function getStaticProps({ params }) {
     } = await pool.query('SELECT * FROM users WHERE id=$1', [post.userid])
     if (userCount !== 1) return { notFound: true }
     const user = users[0]
+    const { rows: totalViews } = await pool.query(
+        `
+            SELECT COUNT(*)
+            FROM post_views
+            WHERE post_id = $1
+        `,
+        [post.id]
+    )
+
+    const { rows: uniqueViews } = await pool.query(
+        `
+            SELECT COUNT(distinct username)
+            FROM post_views
+            WHERE post_id = $1
+        `,
+        [post.id]
+    )
     await pool.end()
     return {
         props: {
@@ -221,7 +243,9 @@ export async function getStaticProps({ params }) {
                 author_id: user.id,
                 author_username: user.username,
                 timestamp: post.timestamp.toString(),
-                id: post.id
+                id: post.id,
+                views: totalViews[0].count,
+                uniqueViews: uniqueViews[0].count
             }
         },
         revalidate: 5

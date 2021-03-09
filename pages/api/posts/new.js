@@ -30,10 +30,14 @@ const submitPost = async (title, content, user, group) => {
     const pool = getDatabasePool()
     // console.log('INSERTING:', title, content, user, group)
     const {
+        rows: users
+    } = await pool.query('SELECT id FROM users WHERE username=$1', [user])
+    const user_id = users[0].id
+    const {
         rows
     } = await pool.query(
         'INSERT INTO posts (posttitle, postcontent, userid, groupid) VALUES ($1, $2, $3, $4) RETURNING id;',
-        [title, content, user, group]
+        [title, content, user_id, group]
     )
     // console.log(rows)
     await pool.end()

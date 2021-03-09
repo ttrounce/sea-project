@@ -13,6 +13,7 @@ article.post > h2.title {
 
 article.post > h3.subtitle {
     text-align: right;
+    margin-bottom: 0;
 }
 
 article.post > h3.subtitle > a.author {
@@ -35,7 +36,7 @@ textarea.newcontent {
 }
 
 button.submit {
-    background-color: #3778C2;
+    background-color: #3778c2;
     border-radius: 0.15rem;
     padding: 0.5rem 1rem;
     margin: 0.5rem 0;
@@ -52,13 +53,15 @@ button.submit:hover {
 }
 
 a.newpostlink {
-    background-color: #3778C2;
+    background-color: #3778c2;
     border-radius: 0.15rem;
     padding: 0.5rem 1rem;
     margin: 0.5rem;
     color: aliceblue;
     text-decoration: none;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    align-items: center;
+    display: flex;
 }
 
 a.newpostlink:hover {
@@ -68,7 +71,7 @@ a.newpostlink:hover {
 a.cancelpostlink {
     color: aliceblue;
     float: right;
-    background-color: #DC143C;
+    background-color: #dc143c;
     border-radius: 0.15rem;
     padding: 0.5rem 1rem;
     margin: 0.5rem;
@@ -86,17 +89,17 @@ div.button_row {
 }
 
 button.edit_button {
-    color: #3778C2;
+    color: #3778c2;
     font-size: medium;
     border-radius: 0.25rem;
-    border: 0.1rem solid #3778C2;
+    border: 0.1rem solid #3778c2;
     padding: 0.25rem;
     background: transparent;
     margin-right: 00.5rem;
 }
 
 button.edit_button:hover {
-    background: #3778C2;
+    background: #3778c2;
     cursor: pointer;
     color: whitesmoke;
 }
@@ -137,18 +140,57 @@ button.report_button:hover {
     gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
     grid-auto-rows: 12rem;
-    width: 50rem;
+    width: CALC(100% - 2rem);
+    margin: 1rem;
 }
 
 .postsContainer .post {
-    background: aliceblue;
+    background: rgba(255, 255, 255, 1);
     padding: 2rem;
-    border-radius: 0.25rem;
+    border-radius: 0.2rem;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.postsContainer .post:hover {
+    transform: scale(1.03);
+}
+
+.shortPostsContainer {
+    display: flex;
+    flex-direction: column;
+    width: CALC(100% - 2rem);
+    margin: 1rem;
+}
+
+.shortPostsContainer .post {
+    background: rgba(255, 255, 255, 1);
+    padding: 2rem;
+    border-radius: 0.2rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    margin: 0.5rem 0;
+}
+
+span.shortViewCount {
+    float: right;
+}
+
+a.groupTag {
+    background: lightcoral;
+    border-radius: 0.3rem;
+    padding: 0.3rem;
+    margin: 0.3rem;
+    position: relative;
+    left: -3rem;
+    box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.3);
+}
+
+a.groupTag:hover {
+    transform: scale(1.5);
 }
 
 select.newPostGroup {
-    color: #0F2557;
+    color: #0f2557;
     background: aliceblue;
     padding: 0.25rem;
     border-radius: 0.25rem;
@@ -157,13 +199,15 @@ select.newPostGroup {
     font-size: inherit;
 }
 
-
 /*----- styling for the post contents (ie the markdown the user entered) -------*/
-article.post a {
+div.articleContent {
+}
+
+div.articleContent a {
     color: blue;
 }
 
-article.post hr {
+div.articleContent hr {
     border: solid #292929;
     border-width: 2px 0 0 0;
     margin: 1em 0;
@@ -171,7 +215,7 @@ article.post hr {
     height: 0;
 }
 
-article.post code {
+div.articleContent code {
     border-radius: 0.25em;
     background-color: #e5e5e5;
     color: #000000;
@@ -179,11 +223,11 @@ article.post code {
     display: inline-block;
 }
 
-article.post pre > code {
+div.articleContent pre > code {
     display: block;
 }
 
-article.post blockquote {
+div.articleContent blockquote {
     border: solid #353535;
     border-width: 0 0 0 0.2rem;
     padding: 0.25rem 0.5rem;
@@ -191,6 +235,12 @@ article.post blockquote {
     background-color: #e5e5e5;
 }
 
-article.post img {
+div.articleContent img {
     max-width: 100%;
+}
+
+p.longViewCount {
+    text-align: right;
+    color: #0f2557;
+    margin-top: 0;
 }

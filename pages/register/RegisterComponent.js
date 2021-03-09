@@ -111,7 +111,9 @@ export default function Register() {
                     type="password"
                     className={customStyles.input}
                     placeholder="Confirm Password"
-                    onChange={(e) => setPasswordConfirmation(e.target.value)}></input>
+                    onChange={(e) =>
+                        setPasswordConfirmation(e.target.value)
+                    }></input>
             </div>
             <p>{passwordMessage}</p>
             <div>

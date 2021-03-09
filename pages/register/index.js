@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import customStyles from '../../styles/custom.module.css'
 import termsStyles from '../../styles/terms.module.css'
-import Navbar from "../../components/Navbar/Navbar"
+import Navbar from '../../components/Navbar/Navbar'
 import { useSession } from 'next-auth/client'
 
 import RegisterComponent from './RegisterComponent'
@@ -14,19 +14,36 @@ export default function Login() {
     }
     return (
         <>
-            <div className={styles.imageBackground} />
+            <div className={styles.exeterStoneBackground} />
             <div className={styles.container}>
                 <Head>
                     <title>Campus Connect</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
                 <>
-                    {!session && <>
-                        <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'Log In', url: '/login'}, {title: 'Register', url: '/register'}]}/>
-                    </>}
-                    {session && <>
-                        <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'My Account', url: '/profile'}]}/>
-                    </>}
+                    {!session && (
+                        <>
+                            <Navbar
+                                content={[
+                                    { title: 'Posts', url: '/posts' },
+                                    { title: 'Groups', url: '/groups' },
+                                    { title: 'Log In', url: '/login' },
+                                    { title: 'Register', url: '/register' }
+                                ]}
+                            />
+                        </>
+                    )}
+                    {session && (
+                        <>
+                            <Navbar
+                                content={[
+                                    { title: 'Posts', url: '/posts' },
+                                    { title: 'Groups', url: '/groups' },
+                                    { title: 'My Account', url: '/profile' }
+                                ]}
+                            />
+                        </>
+                    )}
                 </>
                 <div className={styles.main}>
                     <h1 className={styles.title}>

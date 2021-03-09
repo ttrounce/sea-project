@@ -24,9 +24,9 @@ export default async (req, res) => {
             // Prepared statement to get user details
             const getUserStatement = new PreparedStatement({
                 name: 'get-user-details',
-                text: `SELECT Posts.posttitle, Posts.postcontent, Posts.timestamp
+                text: `SELECT Posts.posttitle, Posts.postcontent, Posts.timestamp, posts.id
                        FROM Posts
-                       LEFT JOIN Users ON Users.id = Posts.userid
+                                LEFT JOIN Users ON Users.id = Posts.userid
                        WHERE Users.id = $1;`,
                 values: [userid]
             })

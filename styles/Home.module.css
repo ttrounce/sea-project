@@ -8,7 +8,91 @@
 }
 
 .imageBackground {
-  background-image: url("../public/background.jpg");
+  background-image: url('../public/background.jpg');
+  background-size: cover;
+  filter: blur(10px);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-repeat: no-repeat;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.laverBackground {
+  background-image: url('../public/static/laver.jpg');
+  background-size: cover;
+  filter: blur(10px);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-repeat: no-repeat;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.constructionBackground {
+  background-image: url('../public/static/construction.jpg');
+  background-size: cover;
+  filter: blur(10px);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-repeat: no-repeat;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.skylineBackground {
+  background-image: url('../public/static/skyline.jpg');
+  background-size: cover;
+  filter: blur(10px);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-repeat: no-repeat;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.exeterStoneBackground {
+  background-image: url('../public/static/exeter_stone.jpg');
+  background-size: cover;
+  filter: blur(10px);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-repeat: no-repeat;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.forumHillBackground {
+  background-image: url('../public/static/forum_hill.jpg');
+  background-size: cover;
+  filter: blur(10px);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-repeat: no-repeat;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.amoryBackground {
+  background-image: url('../public/static/amory.jpg');
+  background-size: cover;
+  filter: blur(10px);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-repeat: no-repeat;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.riverBackground {
+  background-image: url('../public/static/river.jpg');
   background-size: cover;
   filter: blur(10px);
   width: 100%;
@@ -50,16 +134,15 @@
 }
 
 .title a {
-  color: #0F2557;
+  color: #0f2557;
   text-decoration: none;
   text-shadow: 0 0 5rem rgba(255, 255, 255, 1);
   /*text-shadow: 0 0 5rem rgba(0, 0, 0, 1);*/
 }
 
 .description a {
-  color: #0F2557;
+  color: #0f2557;
 }
-
 
 .title a:hover,
 .title a:focus,
@@ -94,8 +177,8 @@
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-  Bitstream Vera Sans Mono, Courier New, monospace;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+  DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
 .grid {
