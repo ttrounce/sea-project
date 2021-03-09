@@ -1,5 +1,5 @@
 .imageBackground {
-    background-image: url('../public/forum.jpg');
+    background-image: url('../public/static/forum.jpg');
     background-size: cover;
     width: 100%;
     height: 100%;
