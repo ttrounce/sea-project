@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import indexStyles from '../styles/index.module.css'
-import Navbar from "../components/Navbar/Navbar"
+import Navbar from '../components/Navbar/Navbar'
 import { useSession } from 'next-auth/client'
 
 export default function Home() {
@@ -80,12 +80,15 @@ export default function Home() {
                     </main>
 
                     <aside className={indexStyles.sidebar}>
-                        <a className={indexStyles.myProfile} href={'/profile'}>
+                        <a
+                            className={indexStyles.myProfile}
+                            href={session ? '/profile' : '/login'}>
                             <img
                                 src={'/static/sunglasses_emoji.png'}
                                 className={indexStyles.sunglasses}
+                                alt={'sunglasses emoji'}
                             />
-                            My Profile
+                            {session ? 'My Profile' : 'Login'}
                         </a>
                     </aside>
                 </div>
