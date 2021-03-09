@@ -4,7 +4,7 @@ import profileStyles from '../../styles/profile.module.css'
 import Navbar from "../components/Navbar/Navbar"
 import { useSession } from 'next-auth/client'
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { signOut } from 'next-auth/client'
 
@@ -14,44 +14,46 @@ export default function Profile() {
     const [posts, setUserPosts] = useState()
     const router = useRouter()
 
+    useEffect(() => {
+        if (session && !user) {
+            // if session is available, get the user's information and display it.
+            axios
+                .post('/api/profile/get_id', {
+                    username: session.user.name,
+                    email: session.user.email
+                })
+                .then((res) => {
+                    const id = res.data.id
+                    axios
+                        .post('/api/profile/get_profile', {
+                            userid: id
+                        })
+                        .then((res) => {
+                            res.data.id = id
+                            setUserData(res.data)
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                    axios
+                        .post('/api/posts/get_user_posts', {
+                            userid: res.data.id
+                        })
+                        .then((res) => {
+                            setUserPosts(res.data)
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
+    }, [])
+    
     if (loading) {
         return <>Loading...</>
-    }
-
-    if (session && !user) {
-        // if session is available, get the user's information and display it.
-        axios
-            .post('/api/profile/get_id', {
-                username: session.user.name,
-                email: session.user.email
-            })
-            .then((res) => {
-                const id = res.data.id
-                axios
-                    .post('/api/profile/get_profile', {
-                        userid: id
-                    })
-                    .then((res) => {
-                        res.data.id = id
-                        setUserData(res.data)
-                    })
-                    .catch((err) => {
-                        console.log(err)
-                    })
-                axios
-                    .post('/api/posts/get_user_posts', {
-                        userid: res.data.id
-                    })
-                    .then((res) => {
-                        setUserPosts(res.data)
-                    })
-                    .catch((err) => {
-                        console.log(err)
-                    })
-            })
-            .catch((err) => {
-                console.log(err)
-            })
     }
 
     if(session && (!user || !posts)) {
