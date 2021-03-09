@@ -1,0 +1,9 @@
+POST http://localhost:3000/api/posts/new HTTP/1.1
+content-type: application/json
+
+{
+    "content": "THIS IS A TEST POST FROM THE TESTING SUITE, PLEASE DELETE",
+    "group": "1",
+    "title": "TEST POST PLEASE DELETE",
+    "user": 95
+}
