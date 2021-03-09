@@ -1,6 +1,6 @@
 POST http://localhost:3000/api/get_profile HTTP/1.1
-content-type: application/json
+Content-Type: application/json
 
 {
-    "userid": "1"
+    "userid": 0
 }

@@ -2,5 +2,5 @@ POST http://localhost:3000/api/get_profile HTTP/1.1
 content-type: application/json
 
 {
-    "userid": "99"
+    "userid": "95"
 }

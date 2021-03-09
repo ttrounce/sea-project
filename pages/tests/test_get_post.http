@@ -1,6 +1,0 @@
-GET http://localhost:3000/api/posts/get_post HTTP/1.1
-content-type: application/json
-
-{
-    "post_id": "34"
-}
