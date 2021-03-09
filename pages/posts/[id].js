@@ -4,7 +4,7 @@ import styles from '../../styles/Home.module.css'
 import postStyles from '../../styles/post.module.css'
 import { getDatabasePool } from '../../database/db-connect'
 import { useEffect, useState } from 'react'
-import Navbar from '../../components/Navbar/Navbar'
+import Navbar from '../components/Navbar/Navbar'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vs as SyntaxHighlightStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism'
@@ -14,6 +14,7 @@ const PostPage = ({ post }) => {
     const router = useRouter()
     const [currentUserName, setCurrentUsername] = useState()
     const [session, loading] = useSession()
+    const [reportButtonText, setReportButtonText] = useState("Report")
     useEffect(() => {
         if (!loading) setCurrentUsername(session?.user?.name)
     }, [loading])
@@ -94,6 +95,23 @@ const PostPage = ({ post }) => {
                                 </ReactMarkdown>
                                 <div className={postStyles.button_row}>
                                     <button
+                                        className={postStyles.report_button}
+                                        onClick={() => {
+                                            if (reportButtonText == "Report") {
+                                                reportPost(post.id, currentUserName)
+                                                .then(async r => {
+                                                    if (r.status === 200) {
+                                                        setReportButtonText("Reported")
+                                                    } else {
+                                                        const message = await r.json()
+                                                        alert(message.message)
+                                                    }
+                                                })  
+                                            }  
+                                        }}>
+                                        { reportButtonText }
+                                    </button>
+                                    <button
                                         className={postStyles.edit_button}
                                         onClick={() => {
                                             router.push(
@@ -131,10 +149,21 @@ const PostPage = ({ post }) => {
 export default PostPage
 
 const deletePost = (post_id) => {
-    return fetch('http://localhost:3000/api/posts/delete', {
+    return fetch('/api/posts/delete', {
         method: 'POST',
         body: JSON.stringify({ post_id }),
         headers: { 'Content-type': 'application/json' }
+    })
+}
+
+const reportPost = (post_id, currentUserName) => {
+    return fetch('/api/posts/report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            post_id: post_id,
+            username: currentUserName
+        })
     })
 }
 

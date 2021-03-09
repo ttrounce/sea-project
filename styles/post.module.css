@@ -82,7 +82,7 @@ a.cancelpostlink:hover {
 
 div.button_row {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 button.edit_button {
@@ -114,6 +114,22 @@ button.delete_button:hover {
     background: crimson;
     cursor: pointer;
     color: whitesmoke;
+}
+
+button.report_button {
+    color: darkgoldenrod;
+    font-size: medium;
+    border-radius: 0.25rem;
+    border: 0.1rem solid darkgoldenrod;
+    padding: 0.25rem;
+    background: transparent;
+    margin-right: 00.5rem;
+}
+
+button.report_button:hover {
+    background: darkgoldenrod;
+    cursor: pointer;
+    color: darkslategray;
 }
 
 .postsContainer {
