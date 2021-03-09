@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import Navbar from "./components/Navbar/Navbar"
+import indexStyles from '../styles/index.module.css'
+import Navbar from './components/Navbar/Navbar'
 import { useSession } from 'next-auth/client'
 
 export default function Home() {
@@ -10,57 +11,84 @@ export default function Home() {
     }
     return (
         <>
-            <div className={styles.imageBackground} />
-            <div className={styles.container}>
+            <div className={indexStyles.imageBackground} />
+            <div className={indexStyles.gradientBackground} />
+            <div>
                 <Head>
                     <title>Campus Connect</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-                <>
-                        {!session && <>
-                            <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'Log In', url: '/login'}, {title: 'Register', url: '/register'}]}/>
-                        </>}
-                        {session && <>
-                            <Navbar content={[{title: 'Posts', url: '/posts'}, {title: 'Groups', url: '/groups'}, {title: 'My Account', url: '/profile'}]}/>
-                        </>}
-                    </>
-                <main className={styles.main}>
-                    <h1 className={styles.title}>
-                        <a href={'/'}>Welcome to Campus Connect</a>
-                    </h1>
-                    <p className={styles.description}>
-                        Get started by <a href={'/register'}>registering</a> or{' '}
-                        <a href={'/login'}>logging in</a>
-                    </p>
 
-                    <div className={styles.grid}>
-                        <a href="/groups" className={styles.card}>
-                            <h3>Groups</h3>
-                            <p>
-                                Find in-depth information about your course in a
-                                group run by your peers
-                            </p>
-                        </a>
+                <div className={indexStyles.navbarWrapper}>
+                    {!session && (
+                        <>
+                            <Navbar
+                                content={[
+                                    { title: 'Posts', url: '/posts' },
+                                    { title: 'Groups', url: '/groups' },
+                                    { title: 'Log In', url: '/login' },
+                                    { title: 'Register', url: '/register' }
+                                ]}
+                            />
+                        </>
+                    )}
+                    {session && (
+                        <>
+                            <Navbar
+                                content={[
+                                    { title: 'Posts', url: '/posts' },
+                                    { title: 'Groups', url: '/groups' },
+                                    { title: 'My Account', url: '/profile' }
+                                ]}
+                            />
+                        </>
+                    )}
+                </div>
+                <div className={indexStyles.container}>
+                    <main className={indexStyles.main}>
+                        <div className={indexStyles.tiles}>
+                            <a className={indexStyles.tile} href={'/posts'}>
+                                <h3>Trending posts</h3>
+                                <p>
+                                    See todays trending insights, comments, and
+                                    anything Exeter related. Posted by students
+                                    and academics
+                                </p>
+                            </a>
+                            <a className={indexStyles.tile} href={'/articles'}>
+                                <h3>Articles</h3>
+                                <p>
+                                    Read articles written by your peers such as
+                                    notes and study resources
+                                </p>
+                            </a>
+                            <a className={indexStyles.tile} href={'/groups'}>
+                                <h3>Groups</h3>
+                                <p>
+                                    Find articles specific to your subject, such
+                                    as computer science or biology
+                                </p>
+                            </a>
+                            <a className={indexStyles.tile} href={'/wellbeing'}>
+                                <h3>Well being</h3>
+                                <p>
+                                    Be mindful of your wellbeing to avoid
+                                    burnout and stress
+                                </p>
+                            </a>
+                        </div>
+                    </main>
 
-                        <a href="/profile" className={styles.card}>
-                            <h3>Profile</h3>
-                            <p>Create a profile and view other users</p>
+                    <aside className={indexStyles.sidebar}>
+                        <a className={indexStyles.myProfile} href={'/profile'}>
+                            <img
+                                src={'/static/sunglasses_emoji.png'}
+                                className={indexStyles.sunglasses}
+                            />
+                            My Profile
                         </a>
-
-                        <a href="/posts" className={styles.card}>
-                            <h3>Posts</h3>
-                            <p>View posts by subject</p>
-                        </a>
-
-                        <a href="/wellbeing" className={styles.card}>
-                            <h3>Wellbeing</h3>
-                            <p>
-                                Manage your wellbeing with metrics and statistics
-                                reporting
-                            </p>
-                        </a>
-                    </div>
-                </main>
+                    </aside>
+                </div>
 
                 <footer className={styles.footer}>
                     Programmed by Brian Evans, Adam Tweedie, Alex Rundle, Toby

@@ -1,0 +1,166 @@
+.imageBackground {
+    background-image: url('../public/forum.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-repeat: no-repeat;
+    z-index: -2;
+    opacity: 0.5;
+    filter: blur(5px);
+}
+
+.gradientBackground {
+    background: linear-gradient(
+            to bottom,
+            transparent,
+            transparent,
+            transparent,
+            transparent,
+            transparent,
+            aliceblue
+    );
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -1;
+}
+
+main.main {
+    width: 60rem;
+    max-width: 100%;
+}
+
+div.tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-auto-rows: 12rem;
+    gap: 2rem;
+    padding: 4rem 0;
+    width: 60rem;
+    max-width: 100%;
+}
+
+a.tile {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 0.2rem;
+    padding: 2rem;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+a.tile:hover {
+    transform: scale(1.03);
+}
+
+a.tile > h3 {
+}
+
+a.tile > p {
+}
+
+aside.sidebar {
+    width: 15rem;
+    /*background-color: rgba(255, 255, 255, 0.5);*/
+    padding: 2rem;
+    /*-webkit-backdrop-filter: blur(5px);*/
+    /*backdrop-filter: blur(5px);*/
+    border-radius: 1rem;
+    display: flex;
+}
+
+div.container {
+    display: flex;
+    justify-content: center;
+}
+
+div.navbarWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+@media screen and (min-width: 90rem) {
+    main.main,
+    .navbarWrapper {
+        margin-left: 15rem;
+    }
+}
+
+@media screen and (min-width: 75rem) {
+    div.container {
+        flex-direction: row;
+    }
+
+    div.navbarWrapper {
+        padding-right: 15rem;
+    }
+
+    aside.sidebar {
+        flex-direction: column;
+    }
+
+    img.sunglasses {
+        width: 14rem;
+    }
+
+    a.myProfile {
+        flex-direction: column;
+    }
+}
+
+img.sunglasses {
+    max-width: 100%;
+    transition: transform 0.3s ease;
+}
+
+a.myProfile:hover img.sunglasses {
+    transform: scale(1.1);
+}
+
+@media screen and (max-width: 75rem) {
+    div.container {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    aside.sidebar {
+        flex-direction: row;
+        background-color: rgba(255, 255, 255, 0.5);
+        margin: 2rem 0;
+    }
+
+    img.sunglasses {
+        width: 5rem;
+    }
+}
+
+@media screen and (min-width: 60rem) and (max-width: 75rem) {
+    aside.sidebar {
+        width: 60rem;
+    }
+}
+
+@media screen and (max-width: 60rem) {
+    aside.sidebar {
+        width: 100%;
+        margin: 1rem;
+    }
+
+    div.tiles {
+        padding: 1rem;
+    }
+
+    img.sunglasses {
+        width: 4rem;
+        max-width: 100%;
+    }
+}
+
+a.myProfile {
+    text-align: center;
+    align-items: center;
+    display: flex;
+}

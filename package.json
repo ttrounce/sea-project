@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "format": "prettier --write pages/**/*.js"
+    "format": "prettier --write \"**/*.(js|css)\""
   },
   "dependencies": {
     "axios": "0.21.1",
