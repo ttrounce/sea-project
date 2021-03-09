@@ -31,7 +31,7 @@ const PostPage = ({ groups }) => {
     useEffect(() => setGroup(group_id ?? groups[0].id), [group_id])
     useEffect(() => {
         if (isEditing) {
-            // fetch(`http://localhost:3000/api/posts/get_post?post_id=${post_id}`)
+            // fetch(`/api/posts/get_post?post_id=${post_id}`)
             axios
                 .get(`/api/posts/get_post`, { params: { post_id } })
                 .then(async (r) => {
@@ -219,13 +219,13 @@ export default PostPage
 
 const submitPost = (title, content, user, group, post_id) => {
     if (post_id)
-        return fetch('http://localhost:3000/api/posts/edit', {
+        return fetch('/api/posts/edit', {
             method: 'POST',
             body: JSON.stringify({ title, content, user, group, post_id }),
             headers: { 'Content-type': 'application/json' }
         })
     else
-        return fetch('http://localhost:3000/api/posts/new', {
+        return fetch('/api/posts/new', {
             method: 'POST',
             body: JSON.stringify({ title, content, user, group }),
             headers: { 'Content-type': 'application/json' }
