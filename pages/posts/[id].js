@@ -3,8 +3,8 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import postStyles from '../../styles/post.module.css'
 import { getDatabasePool } from '../../database/db-connect'
-import { useState } from 'react'
-import Navbar from "../components/Navbar/Navbar"
+import { useEffect, useState } from 'react'
+import Navbar from '../../components/Navbar/Navbar'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vs as SyntaxHighlightStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism'
@@ -12,10 +12,26 @@ import { useSession } from 'next-auth/client'
 
 const PostPage = ({ post }) => {
     const router = useRouter()
+    const [currentUserName, setCurrentUsername] = useState()
     const [session, loading] = useSession()
-    const [currentUserName, setCurrentUsername] = useState('anonymous')
-    //this needs updating when cookies/localStorage are working
-    // setCurrentUsername(window.localStorage.getItem('fullname') || 'anonymous')
+    useEffect(() => {
+        if (!loading) setCurrentUsername(session?.user?.name)
+    }, [loading])
+    useEffect(() => {
+        if (!loading) {
+            fetch('/api/posts/view', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    post_id: post.id,
+                    username: currentUserName,
+                    timestamp: Date.now()
+                })
+            })
+                .then((r) => console.log('pageview response', r.status)) // page view
+                .catch((error) => console.error('Page view failed:', error))
+        }
+    }, [currentUserName])
     const renderers = {
         code: ({ language, value }) => {
             return (
@@ -35,7 +51,14 @@ const PostPage = ({ post }) => {
                     <title>Campus Connect</title>
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-                <Navbar />
+                <Navbar
+                    content={[
+                        { title: 'Posts', url: '/posts' },
+                        { title: 'Groups', url: '/groups' },
+                        { title: 'Log In', url: '/login' },
+                        { title: 'Register', url: '/register' }
+                    ]}
+                />
                 <main className={styles.main}>
                     <h1 className={styles.title}>
                         <a href={'/posts'}>Campus Connect Posts</a>
@@ -69,19 +92,31 @@ const PostPage = ({ post }) => {
                                 <ReactMarkdown renderers={renderers}>
                                     {post.body}
                                 </ReactMarkdown>
-                                <button
-                                    className={postStyles.delete_button}
-                                    onClick={() => {
-                                        const confirmation = confirm(
-                                            'Are you sure you want to delete your post?'
-                                        )
-                                        if (confirmation)
-                                            deletePost(post.id).then(() =>
-                                                router.push('/posts')
+                                <div className={postStyles.button_row}>
+                                    <button
+                                        className={postStyles.edit_button}
+                                        onClick={() => {
+                                            router.push(
+                                                '/posts/newpost/?post_id=' +
+                                                    post.id
                                             )
-                                    }}>
-                                    Delete
-                                </button>
+                                        }}>
+                                        Edit
+                                    </button>
+                                    <button
+                                        className={postStyles.delete_button}
+                                        onClick={() => {
+                                            const confirmation = confirm(
+                                                'Are you sure you want to delete your post?'
+                                            )
+                                            if (confirmation)
+                                                deletePost(post.id).then(() =>
+                                                    router.push('/posts')
+                                                )
+                                        }}>
+                                        Delete
+                                    </button>
+                                </div>
                             </>
                         ) : (
                             <h3>Post does not exist</h3>
@@ -118,6 +153,7 @@ export async function getStaticProps({ params }) {
     } = await pool.query('SELECT * FROM users WHERE id=$1', [post.userid])
     if (userCount !== 1) return { notFound: true }
     const user = users[0]
+    await pool.end()
     return {
         props: {
             post: {
@@ -128,13 +164,15 @@ export async function getStaticProps({ params }) {
                 timestamp: post.timestamp.toString(),
                 id: post.id
             }
-        }
+        },
+        revalidate: 5
     }
 }
 
 export async function getStaticPaths() {
     const pool = getDatabasePool()
     const { rows } = await pool.query('SELECT CAST(id AS text) FROM posts')
+    await pool.end()
     return {
         paths: rows.map((row) => ({ params: row })),
         fallback: true

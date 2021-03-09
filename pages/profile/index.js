@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import profileStyles from '../../styles/profile.module.css'
-import Navbar from "../components/Navbar/Navbar"
+import Navbar from "../../components/Navbar/Navbar"
 import { useSession } from 'next-auth/client'
 
 export default function Profile() {

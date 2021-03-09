@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import customStyles from '../../styles/custom.module.css'
 import termsStyles from '../../styles/terms.module.css'
-import Navbar from "../components/Navbar/Navbar"
+import Navbar from "../../components/Navbar/Navbar"
 import { useSession } from 'next-auth/client'
 
 import RegisterComponent from './RegisterComponent'

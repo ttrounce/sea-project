@@ -65,8 +65,43 @@ a.newpostlink:hover {
     text-decoration: none;
 }
 
-button.delete_button {
+a.cancelpostlink {
+    color: aliceblue;
     float: right;
+    background-color: #DC143C;
+    border-radius: 0.15rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    text-decoration: none;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+}
+
+a.cancelpostlink:hover {
+    text-decoration: none;
+}
+
+div.button_row {
+    display: flex;
+    justify-content: flex-end;
+}
+
+button.edit_button {
+    color: #3778C2;
+    font-size: medium;
+    border-radius: 0.25rem;
+    border: 0.1rem solid #3778C2;
+    padding: 0.25rem;
+    background: transparent;
+    margin-right: 00.5rem;
+}
+
+button.edit_button:hover {
+    background: #3778C2;
+    cursor: pointer;
+    color: whitesmoke;
+}
+
+button.delete_button {
     color: crimson;
     font-size: medium;
     border-radius: 0.25rem;

@@ -22,16 +22,13 @@ export default async (req, res) => {
 const deletePost = async (post_id) => {
     const { getDatabasePool } = require('../../../database/db-connect')
     const pool = getDatabasePool()
-    console.log('Deleting:', post_id)
+    // console.log('Deleting:', post_id)
     const {
         rows
     } = await pool.query(
         'WITH deleted AS (DELETE FROM Posts WHERE ID = $1 RETURNING *) SELECT COUNT(*) FROM deleted;',
         [post_id]
     )
-    console.log(rows)
-    console.log(rows[0])
-    console.log(rows[0].count)
     return rows[0].count
 }
 
