@@ -3,6 +3,8 @@ import styles from '../../styles/Home.module.css'
 import Navbar from "../../components/Navbar/Navbar"
 import { useSession } from 'next-auth/client'
 
+import Wellbeing from './quiz'
+
 export default function Posts() {
     const [session, loading] = useSession()
     if (loading) {
@@ -31,13 +33,12 @@ export default function Posts() {
                     </h1>
 
                     <p className={styles.description}>
-                        View your well-being statistics
+                        Take your Well-Being assessment now!
                     </p>
 
-                    <div className={styles.grid}>
-                        <a href="" className={styles.card}>
-                            <h3>How are you feeling on a scale of 1 to 10?</h3>
-                            <input type={'number'} />
+                    <div className={styles.card}>
+                        <a href="/wellbeing/quiz">
+                            Begin Quiz.
                         </a>
                     </div>
                 </main>
