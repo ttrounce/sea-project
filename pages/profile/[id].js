@@ -3,7 +3,7 @@ import { getDatabasePool } from '../../database/db-connect'
 import styles from '../../styles/Home.module.css'
 import profileStyles from '../../styles/profile.module.css'
 import Head from 'next/head'
-import Navbar from "../components/Navbar/Navbar"
+import Navbar from "../../components/Navbar/Navbar"
 
 const ProfilePage = ({ user, posts }) => {
     const router = useRouter()
