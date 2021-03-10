@@ -96,7 +96,7 @@ const NewGroup = ({ groups }) => {
 }
 export default NewGroup
 const submitNewGroup = (name, description) => {
-    return fetch('http://localhost:3000/api/groups/new', {
+    return fetch('/api/groups/new', {
         method: 'POST',
         body: JSON.stringify({ name, description }),
         headers: { 'Content-type': 'application/json' }

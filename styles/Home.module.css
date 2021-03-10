@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
-
 .container {
     min-height: 100vh;
     /* padding: 0 0.5rem; */
@@ -143,7 +141,6 @@
 
 .description a {
     color: #0f2557;
-    font-family: 'Lato', sans-serif;
 }
 
 .title a:hover,

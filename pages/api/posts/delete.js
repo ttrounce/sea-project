@@ -3,6 +3,7 @@ export default async (req, res) => {
     if (validationError) {
         res.status(400).json({ message: validationError })
     } else {
+        // returns status 200 on success, else the appropriate error message
         deletePost(req.body.post_id)
             .then((count) => {
                 if (count === 0) {
@@ -18,7 +19,7 @@ export default async (req, res) => {
             )
     }
 }
-
+// deletes post from database and returns the number of posts deleted (should be 1)
 const deletePost = async (post_id) => {
     const { getDatabasePool } = require('../../../database/db-connect')
     const pool = getDatabasePool()
@@ -32,6 +33,7 @@ const deletePost = async (post_id) => {
     return Number(rows[0].count)
 }
 
+// checks that a post id was supplied
 const validateInput = (post_id) => {
     if (!post_id) return 'post id missing'
     return false

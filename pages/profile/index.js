@@ -216,23 +216,25 @@ export default function Profile() {
                                             'Are you sure you want to delete your account? This action is irreversible.'
                                         )
                                         if (confirmation) {
-                                            deleteUser(user?.id).then(() => {
-                                                signOut()
-                                                router.push('/')
-                                            })
+                                            deleteUser(user?.id).then(
+                                                async () => {
+                                                    signOut()
+                                                    await router.push('/', '/')
+                                                }
+                                            )
                                         }
                                     }}>
                                     Delete Account
                                 </button>
                                 <button
                                     className={profileStyles.logout_button}
-                                    onClick={() => {
+                                    onClick={async () => {
                                         const confirmation = confirm(
                                             'Are you want to log out?'
                                         )
                                         if (confirmation) {
                                             signOut()
-                                            router.push('/')
+                                            await router.push('/', '/')
                                         }
                                     }}>
                                     Log out

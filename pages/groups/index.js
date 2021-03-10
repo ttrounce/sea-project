@@ -43,10 +43,7 @@ export default function Groups({ groups }) {
                     )}
                 </>
                 <main className={styles.main}>
-                    <h1 className={styles.title}>
-                        {' '}
-                        <a href={'/'}>Campus Connect Groups</a>
-                    </h1>
+                    <h1 className={styles.title}> Groups</h1>
 
                     <p className={styles.description}>
                         View student-created groups from different courses
@@ -82,7 +79,7 @@ export default function Groups({ groups }) {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const { getDatabasePool } = require('../../database/db-connect')
     const pool = getDatabasePool()
     const { rows: groups } = await pool.query(
@@ -99,6 +96,7 @@ export async function getStaticProps() {
             ;
         `
     )
+    await pool.end()
     return {
         props: {
             groups

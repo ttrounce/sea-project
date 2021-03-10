@@ -23,7 +23,12 @@ const ProfilePage = ({ user, posts }) => {
                 console.log('error: ' + err)
             })
     }, [])
-
+    const getMedalEmoji = (numberOfViews) => {
+        if (numberOfViews === 0) return '🆕'
+        else if (numberOfViews < 5) return '🥉'
+        else if (numberOfViews < 50) return '🥈'
+        else return '🥇'
+    }
     return (
         <>
             <div className={styles.skylineBackground} />
@@ -98,7 +103,10 @@ const ProfilePage = ({ user, posts }) => {
                                 </p>
                                 <p>
                                     Written {user?.noofposts} posts, which have
-                                    a total of {user?.postsViews} views
+                                    a total of {user?.postsViews} views{' '}
+                                    {getMedalEmoji(
+                                        Number(user?.postsViews || 0)
+                                    )}
                                 </p>
                                 <p>
                                     Viewed {user?.lastDaysViews} posts in the
@@ -134,7 +142,9 @@ const ProfilePage = ({ user, posts }) => {
                                                     ? 's'
                                                     : ''}
                                             </p>
-                                            <a href={'/posts/' + post.post_id}>
+                                            <a
+                                                href={'/posts/' + post.post_id}
+                                                className={profileStyles.link}>
                                                 Read
                                             </a>
                                         </>

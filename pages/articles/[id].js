@@ -112,7 +112,7 @@ const PostPage = ({ post }) => {
                                 </p>
                                 <p className={postStyles.reportCount}>
                                     {post.reports != 0
-                                        ? `Reported by ${post.reports} user${
+                                        ? `🚩 Reported by ${post.reports} user${
                                               post.reports != 1 ? 's' : ''
                                           }`
                                         : ''}
@@ -126,7 +126,8 @@ const PostPage = ({ post }) => {
                                     <button
                                         className={postStyles.report_button}
                                         onClick={() => {
-                                            if (reportButtonText == 'Report') {
+                                            // this checks if they have already reported the post
+                                            if (reportButtonText === 'Report') {
                                                 reportPost(
                                                     post.id,
                                                     currentUserName
@@ -162,6 +163,7 @@ const PostPage = ({ post }) => {
                                         <button
                                             className={postStyles.delete_button}
                                             onClick={() => {
+                                                // this makes a popup to check if they are certain
                                                 const confirmation = confirm(
                                                     'Are you sure you want to delete your post?'
                                                 )
@@ -189,6 +191,7 @@ const PostPage = ({ post }) => {
 
 export default PostPage
 
+// call to the backend to delete a post from the database
 const deletePost = (post_id) => {
     return fetch('/api/posts/delete', {
         method: 'POST',
@@ -197,6 +200,7 @@ const deletePost = (post_id) => {
     })
 }
 
+// calls the backend API to report a post
 const reportPost = (post_id, currentUserName) => {
     return fetch('/api/posts/report', {
         method: 'POST',
@@ -208,6 +212,7 @@ const reportPost = (post_id, currentUserName) => {
     })
 }
 
+// this function gets an article from the database at build time and page load
 export async function getStaticProps({ params }) {
     if (isNaN(params.id)) return { notFound: true }
     const pool = getDatabasePool()
@@ -267,6 +272,7 @@ export async function getStaticProps({ params }) {
     }
 }
 
+// this function pre-renders all the articles that already exist at build time
 export async function getStaticPaths() {
     const pool = getDatabasePool()
     const { rows } = await pool.query('SELECT CAST(id AS text) FROM posts')

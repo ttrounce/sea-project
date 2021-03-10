@@ -3,6 +3,7 @@ export default async (req, res) => {
     if (validationError) {
         res.status(400).json({ message: validationError })
     } else {
+        // return the group id if successful, else return error message
         createGroup(req.body.name, req.body.description)
             .then((group_id) =>
                 res
@@ -16,6 +17,7 @@ export default async (req, res) => {
     }
 }
 
+// inserts a group into the database and returns the group ID
 const createGroup = async (name, description) => {
     const { getDatabasePool } = require('../../../database/db-connect')
     const pool = getDatabasePool()
@@ -30,6 +32,7 @@ const createGroup = async (name, description) => {
     if (rows.length === 1) return rows[0].id
 }
 
+// checks that both the name and description were supplied (cannot be empty)
 const validateInput = (name, description) => {
     if (!name) return 'name missing'
     if (!description) return 'description missing'

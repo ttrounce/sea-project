@@ -17,9 +17,11 @@ const PostPage = ({ post }) => {
     const [reportButtonText, setReportButtonText] = useState('Report')
 
     useEffect(() => {
+        //when the session is finished loading, set the username
         if (!loading) setCurrentUsername(session?.user?.name)
     }, [loading])
     useEffect(() => {
+        // this registers a view in the database for the current user on this post
         if (!loading) {
             fetch('/api/posts/view', {
                 method: 'POST',
@@ -27,14 +29,14 @@ const PostPage = ({ post }) => {
                 body: JSON.stringify({
                     post_id: post?.id,
                     username: session?.user?.name,
+                    // timestamp is set at time of page load, rather than time of insert
                     timestamp: Date.now()
                 })
-            })
-                .then((r) => console.log('pageview response', r.status)) // page view
-                .catch((error) => console.error('Page view failed:', error))
+            }).catch((error) => console.error('Page view failed:', error))
         }
     }, [loading])
     const renderers = {
+        // this is the syntax highlighter for code blocks in markdown
         code: ({ language, value }) => {
             return (
                 <SyntaxHighlighter
@@ -106,7 +108,7 @@ const PostPage = ({ post }) => {
                                 </h3>
                                 <p className={postStyles.reportCount}>
                                     {post.reports != 0
-                                        ? `Reported by ${post.reports} user${
+                                        ? `🚩Reported by ${post.reports} user${
                                               post.reports != 1 ? 's' : ''
                                           }`
                                         : ''}
@@ -144,6 +146,7 @@ const PostPage = ({ post }) => {
                                         <button
                                             className={postStyles.edit_button}
                                             onClick={() => {
+                                                // redirects to edit page
                                                 router.push(
                                                     '/posts/newpost/?post_id=' +
                                                         post.id
@@ -157,6 +160,7 @@ const PostPage = ({ post }) => {
                                         <button
                                             className={postStyles.delete_button}
                                             onClick={() => {
+                                                // pop up to verify action
                                                 const confirmation = confirm(
                                                     'Are you sure you want to delete your post?'
                                                 )
@@ -184,6 +188,7 @@ const PostPage = ({ post }) => {
 
 export default PostPage
 
+// call to the backend to delete a post from the database
 const deletePost = (post_id) => {
     return fetch('/api/posts/delete', {
         method: 'POST',
@@ -192,6 +197,7 @@ const deletePost = (post_id) => {
     })
 }
 
+// calls the backend API to report a post
 const reportPost = (post_id, currentUserName) => {
     return fetch('/api/posts/report', {
         method: 'POST',
@@ -203,6 +209,7 @@ const reportPost = (post_id, currentUserName) => {
     })
 }
 
+// this function gets an article from the database at build time and page load
 export async function getStaticProps({ params }) {
     if (isNaN(params.id)) return { notFound: true }
     const pool = getDatabasePool()
@@ -243,6 +250,7 @@ export async function getStaticProps({ params }) {
     }
 }
 
+// this function pre-renders all the articles that already exist at build time
 export async function getStaticPaths() {
     const pool = getDatabasePool()
     const { rows } = await pool.query('SELECT CAST(id AS text) FROM posts')
