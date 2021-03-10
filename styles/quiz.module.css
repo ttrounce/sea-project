@@ -1,0 +1,57 @@
+.questionNum {
+    color: #0f2557;
+}
+
+.questionNum {
+    text-align: start;
+}
+
+.questionNum {
+    line-height: 1.5;
+    font-size: 1rem;
+}
+
+.question {
+    color: #0f2557;
+}
+
+.question {
+    text-align: start;
+}
+
+.question {
+    line-height: 1.5;
+    font-size: 1.5rem;
+    font-style: bold;
+}
+
+button.answerBtn {
+    background-color: #3778c2;
+    border-radius: 0.15rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 1rem 0.5rem 0;
+    color: aliceblue;
+    text-decoration: none;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    border: none;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+button.answerBtn:hover {
+    background: #4795f3;
+    cursor: pointer;
+}
+
+.card {
+    margin: 1rem;
+    flex-basis: 45%;
+    padding: 1.5rem;
+    text-align: left;
+    color: white;
+    background-color: #fff;
+    border-radius: 0.2rem;
+    text-decoration: none;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+}

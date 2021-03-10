@@ -1,0 +1,48 @@
+.input {
+    margin: 5px;
+    border: none;
+    border-bottom: 0.1rem solid #0f2557;
+    color: #0f2557;
+    font-size: inherit;
+    height: 2rem;
+    border-radius: 0.2rem;
+    background: aliceblue;
+}
+
+.subtitle {
+    font-size: 25px;
+    margin: 20px;
+}
+
+.button {
+    margin-top: 20px;
+    padding: 6px 25px;
+    background: #3778c2;
+    border: none;
+    color: white;
+    border-radius: 2px;
+}
+
+.button:hover {
+    cursor: pointer;
+    background: #4285d1;
+}
+
+.button:active {
+    background: #4e97eb;
+}
+
+.card {
+    background: rgba(255, 255, 255, 1);
+    padding: 2rem;
+    border-radius: 0.2rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    width: CALC(100% - 2rem);
+    margin: 1rem;
+    flex-basis: 45%;
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid #eaeaea;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}

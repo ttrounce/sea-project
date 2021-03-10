@@ -1,0 +1,50 @@
+section.profile {
+    width: 100%;
+    background: aliceblue;
+    padding: 2rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+}
+
+div.recentPostsContainer {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+}
+
+a.link {
+    color: #0070f3;
+}
+
+button.delete_button {
+    float: right;
+    color: crimson;
+    font-size: medium;
+    border-radius: 0.25rem;
+    border: 0.1rem solid crimson;
+    padding: 0.25rem;
+    background: transparent;
+}
+
+button.delete_button:hover {
+    background: crimson;
+    cursor: pointer;
+    color: whitesmoke;
+}
+
+button.logout_button {
+    margin: 0 0.2em;
+    float: right;
+    color: black;
+    font-size: medium;
+    border-radius: 0.25rem;
+    border: 0.1rem solid black;
+    padding: 0.25rem;
+    background: transparent;
+}
+
+button.logout_button:hover {
+    background: black;
+    cursor: pointer;
+    color: whitesmoke;
+}

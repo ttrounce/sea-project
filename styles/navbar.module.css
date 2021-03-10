@@ -1,0 +1,131 @@
+.NavbarItems {
+    background: #3778c2;
+    height: 5.25rem;
+    width: 60rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.navbarlogo {
+    color: aliceblue;
+    justify-self: start;
+    flex-shrink: 0;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.navmenu {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    grid-gap: 10px;
+    list-style: none;
+    text-align: center;
+    width: 70vw;
+    justify-content: end;
+    margin-right: 2rem;
+}
+
+.navlinks {
+    color: aliceblue;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+}
+
+.navlinks:hover {
+    background-color: #4285d1;
+    border-radius: 2px;
+    transition: all 0.2s ease-out;
+}
+
+.navlinks:active {
+    background-color: #4e97eb;
+}
+
+.fa_bars {
+    color: aliceblue;
+}
+
+.navlinksmobile {
+    display: none;
+}
+
+.menuicon {
+    display: none;
+}
+
+@media only screen and (max-width: 960px) {
+    .NavbarItems {
+        position: relative;
+        width: 100%;
+    }
+
+    .navmenu {
+        padding: 0px;
+        margin: 0px;
+
+        row-gap: 0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 5.25rem;
+        left: -100%;
+        opacity: 1;
+        transition: all 0.5s ease;
+    }
+
+    .navmenu_active {
+        padding: 0px;
+        margin: 0px;
+
+        background: #3778c2;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 5.25rem;
+        left: 0%;
+        opacity: 1;
+        transition: all 0.5s ease;
+        z-index: 1;
+    }
+
+    .navlinks {
+        text-align: center;
+        padding: 1.5rem;
+        width: 100%;
+        display: table;
+    }
+
+    .navlinks:hover {
+        background-color: #4285d1;
+        border-radius: 0;
+    }
+
+    .navlinks:active {
+        background: #4e97eb;
+    }
+
+    .navbarlogo {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .menuicon {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(-100%, 60%);
+        font-size: 1.8rem;
+        cursor: pointer;
+    }
+
+    .fa_times {
+        color: aliceblue;
+        font-size: 2rem;
+    }
+}

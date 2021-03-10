@@ -1,0 +1,275 @@
+article.post {
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    padding: 3rem;
+    width: CALC(100% - 2rem);
+    margin: 1rem;
+    background: white;
+}
+
+article.post > h2.title {
+    font-weight: lighter;
+    font-size: xx-large;
+}
+
+article.post > h3.subtitle {
+    text-align: right;
+    margin-bottom: 0;
+}
+
+article.post > h3.subtitle > a.author {
+    color: #0070f3;
+}
+
+article.post > h3.subtitle > span.date {
+    color: #0070f3;
+}
+
+input.newtitle {
+    font-size: inherit;
+    width: 100%;
+}
+
+textarea.newcontent {
+    width: 100%;
+    min-height: 10rem;
+    font-size: inherit;
+}
+
+button.submit {
+    background-color: #3778c2;
+    border-radius: 0.15rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    color: aliceblue;
+    text-decoration: none;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    border: none;
+    font-size: inherit;
+}
+
+button.submit:hover {
+    background: #4795f3;
+    cursor: pointer;
+}
+
+a.newpostlink {
+    background-color: #3778c2;
+    border-radius: 0.15rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    color: aliceblue;
+    text-decoration: none;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    align-items: center;
+    display: flex;
+}
+
+a.newpostlink:hover {
+    text-decoration: none;
+}
+
+a.cancelpostlink {
+    color: aliceblue;
+    float: right;
+    background-color: #dc143c;
+    border-radius: 0.15rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    text-decoration: none;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+}
+
+a.cancelpostlink:hover {
+    text-decoration: none;
+}
+
+div.button_row {
+    display: flex;
+    justify-content: space-between;
+}
+
+button.edit_button {
+    color: #3778c2;
+    font-size: medium;
+    border-radius: 0.25rem;
+    border: 0.1rem solid #3778c2;
+    padding: 0.25rem;
+    background: transparent;
+    margin-right: 00.5rem;
+}
+
+button.edit_button:hover {
+    background: #3778c2;
+    cursor: pointer;
+    color: whitesmoke;
+}
+
+button.delete_button {
+    color: crimson;
+    font-size: medium;
+    border-radius: 0.25rem;
+    border: 0.1rem solid crimson;
+    padding: 0.25rem;
+    background: transparent;
+}
+
+button.delete_button:hover {
+    background: crimson;
+    cursor: pointer;
+    color: whitesmoke;
+}
+
+button.report_button {
+    color: darkgoldenrod;
+    font-size: medium;
+    border-radius: 0.25rem;
+    border: 0.1rem solid darkgoldenrod;
+    padding: 0.25rem;
+    background: transparent;
+    margin-right: 00.5rem;
+}
+
+button.report_button:hover {
+    background: darkgoldenrod;
+    cursor: pointer;
+    color: darkslategray;
+}
+
+@media screen and (max-width: 26rem) {
+    .postsContainer {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .postsContainer .post {
+        margin: 0.5rem 0;
+    }
+}
+
+@media screen and (min-width: 26rem) {
+    .postsContainer {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+        grid-auto-rows: 12rem;
+    }
+
+    .postsContainer .post {
+    }
+}
+
+.postsContainer {
+    width: CALC(100% - 2rem);
+    margin: 1rem;
+}
+
+.postsContainer .post {
+    background: rgba(255, 255, 255, 1);
+    padding: 2rem;
+    border-radius: 0.2rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.postsContainer .post:hover {
+    transform: scale(1.03);
+}
+
+.shortPostsContainer {
+    display: flex;
+    flex-direction: column;
+    width: CALC(100% - 2rem);
+    margin: 1rem;
+}
+
+.shortPostsContainer .post {
+    background: rgba(255, 255, 255, 1);
+    padding: 2rem;
+    border-radius: 0.2rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    margin: 0.5rem 0;
+}
+
+.shortPostsContent img {
+    display: none;
+}
+
+span.shortViewCount {
+    float: right;
+}
+
+p.reportCount {
+    text-align: right;
+    color: crimson;
+    margin-top: 0;
+}
+
+a.groupTag {
+    background: lightblue;
+    border-radius: 0.3rem;
+    padding: 0.3rem;
+    margin: 0.3rem;
+    position: relative;
+    left: -3rem;
+    box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.3);
+}
+
+a.groupTag:hover {
+    transform: scale(1.5);
+}
+
+select.newPostGroup {
+    color: #0f2557;
+    background: aliceblue;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 0.15rem rgba(0, 0, 0, 0.2);
+    margin: 0.5rem 0;
+    font-size: inherit;
+}
+
+/*----- styling for the post contents (ie the markdown the user entered) -------*/
+div.articleContent {
+}
+
+div.articleContent a {
+    color: blue;
+}
+
+div.articleContent hr {
+    border: solid #292929;
+    border-width: 2px 0 0 0;
+    margin: 1em 0;
+    padding: 0;
+    height: 0;
+}
+
+div.articleContent code {
+    border-radius: 0.25em;
+    background-color: #e5e5e5;
+    color: #000000;
+    padding: 0.5em;
+    display: inline-block;
+}
+
+div.articleContent pre > code {
+    display: block;
+}
+
+div.articleContent blockquote {
+    border: solid #353535;
+    border-width: 0 0 0 0.2rem;
+    padding: 0.25rem 0.5rem;
+    margin: 0.5rem;
+    background-color: #e5e5e5;
+}
+
+div.articleContent img {
+    max-width: 100%;
+}
+
+p.longViewCount {
+    text-align: right;
+    color: #0f2557;
+    margin-top: 0;
+}
