@@ -253,14 +253,17 @@ export async function getStaticProps({ params }) {
                 ...post,
                 timestamp: post.timestamp.toString()
             }))
-        }
+        },
+        revalidate: 1
     }
 }
 
 // this gets a list of all the users
 export async function getStaticPaths() {
     const pool = getDatabasePool()
-    const { rows } = await pool.query('SELECT username::text FROM users')
+    const { rows } = await pool.query(
+        'SELECT username::text FROM users ORDER BY signup_date DESC LIMIT 10'
+    )
     await pool.end()
     return {
         paths: rows.map((row) => ({ params: row })),

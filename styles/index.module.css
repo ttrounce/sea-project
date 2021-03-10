@@ -145,7 +145,7 @@ a.myProfile:hover img.sunglasses {
 
 @media screen and (max-width: 60rem) {
     aside.sidebar {
-        width: 100%;
+        width: CALC(100% - 2rem);
         margin: 1rem;
     }
 

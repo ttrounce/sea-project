@@ -79,7 +79,7 @@ export default function Groups({ groups }) {
     )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const { getDatabasePool } = require('../../database/db-connect')
     const pool = getDatabasePool()
     const { rows: groups } = await pool.query(
@@ -88,9 +88,10 @@ export async function getServerSideProps() {
                    g.groupname          AS name,
                    g.groupdesc          AS description,
                    COUNT(DISTINCT p.id) AS num_posts
-            FROM groups g,
-                 posts p
-            WHERE p.groupid = g.id
+            FROM groups g
+                     LEFT JOIN
+                 posts p ON
+                     p.groupid = g.id
             GROUP BY g.id, g.groupname, g.groupdesc
             LIMIT 500
             ;
@@ -100,6 +101,7 @@ export async function getServerSideProps() {
     return {
         props: {
             groups
-        }
+        },
+        revalidate: 1
     }
 }

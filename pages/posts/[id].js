@@ -246,14 +246,16 @@ export async function getStaticProps({ params }) {
                 reports
             }
         },
-        revalidate: 5
+        revalidate: 1
     }
 }
 
 // this function pre-renders all the articles that already exist at build time
 export async function getStaticPaths() {
     const pool = getDatabasePool()
-    const { rows } = await pool.query('SELECT CAST(id AS text) FROM posts')
+    const { rows } = await pool.query(
+        'SELECT CAST(id AS text) FROM posts ORDER BY timestamp DESC LIMIT 10'
+    )
     await pool.end()
     return {
         paths: rows.map((row) => ({ params: row })),

@@ -259,6 +259,7 @@ export async function getStaticProps() {
     return {
         props: {
             groups
-        }
+        },
+        revalidate: 1
     }
 }

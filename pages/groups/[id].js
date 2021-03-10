@@ -165,7 +165,8 @@ export async function getStaticProps({ params }) {
         props: {
             posts,
             group
-        }
+        },
+        revalidate: 1
     }
 }
 

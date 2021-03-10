@@ -1,8 +1,8 @@
 article.post {
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
-    margin: 2rem;
     padding: 3rem;
-    width: 60rem;
+    width: CALC(100% - 2rem);
+    margin: 1rem;
     background: white;
 }
 
@@ -135,11 +135,30 @@ button.report_button:hover {
     color: darkslategray;
 }
 
+@media screen and (max-width: 26rem) {
+    .postsContainer {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .postsContainer .post {
+        margin: 0.5rem 0;
+    }
+}
+
+@media screen and (min-width: 26rem) {
+    .postsContainer {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+        grid-auto-rows: 12rem;
+    }
+
+    .postsContainer .post {
+    }
+}
+
 .postsContainer {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
-    grid-auto-rows: 12rem;
     width: CALC(100% - 2rem);
     margin: 1rem;
 }
