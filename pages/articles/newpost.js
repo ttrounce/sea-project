@@ -84,10 +84,10 @@ const PostPage = ({ groups }) => {
                 )}
                 <main className={styles.main}>
                     <h1 className={styles.title}>
-                        <a href={'/posts'}>Campus Connect Posts</a>
+                        <a href={'/articles'}>Campus Connect Articles</a>
                     </h1>
 
-                    <p className={styles.description}>Write a new post</p>
+                    <p className={styles.description}>Write a new article</p>
                     <article className={postStyles.post}>
                         <h2>
                             {editingTitle ? (
@@ -142,7 +142,7 @@ const PostPage = ({ groups }) => {
                                 <ReactMarkdown renderers={renderers}>
                                     {content ||
                                         `
-### Write your new article here!
+### Click here to write your new article!
 
 You can use markdown in your post for styling.
 

@@ -13,7 +13,7 @@ export default function Login() {
         e.preventDefault()
 
         const res = signIn('username-login', {
-            callbackUrl: `${process.env.NEXT_PUBLIC_SELF_URL}/login`,
+            callbackUrl: `/login`,
             redirect: false,
             username,
             password

@@ -71,6 +71,17 @@ export default function Posts({ posts, group }) {
                                 key={post.post_id}
                                 href={'/posts/' + post.post_id}
                                 className={postStyles.post}>
+                                <a
+                                    className={groupStyles.postTag}
+                                    href={
+                                        post.post_body?.length > 250
+                                            ? '/articles'
+                                            : '/posts'
+                                    }>
+                                    {post.post_body?.length > 250
+                                        ? 'article'
+                                        : 'post'}
+                                </a>
                                 <h3>{post.post_title}</h3>
                                 <p>
                                     Written by {post.author} on{' '}
@@ -102,26 +113,38 @@ export async function getStaticProps({ params }) {
     const pool = getDatabasePool()
     const { rows: posts, rowCount: postCount } = await pool.query(
         `
-            WITH recent_posts AS (SELECT p.id                            AS post_id,
-                                         p.posttitle                     AS post_title,
-                                         p.postcontent                   AS post_body,
-                                         u.firstname || ' ' || u.surname AS author,
-                                         p.timestamp::text               AS timestamp,
-                                         g.groupname                     AS group_name,
-                                         g.id                            AS group_id,
-                                         COUNT(distinct pv.view_id)      as views,
-                                         COUNT(distinct pv.username)     as unique_views
-                                  FROM posts p
-                                           LEFT JOIN
-                                       post_views pv ON p.id = pv.post_id,
-                                       users u,
-                                       groups g
-                                  WHERE p.userid = u.id
-                                    AND g.id = p.groupid
-                                    AND g.id = $1
-                                  GROUP BY p.id, post_title, post_body, author, p.timestamp, group_name, group_id
-                                  ORDER BY p.timestamp DESC
-                                  LIMIT 8)
+            WITH recent_posts AS (
+                SELECT p.id                            AS post_id,
+                       p.posttitle                     AS post_title,
+                       p.postcontent                   AS post_body,
+                       u.firstname || ' ' || u.surname AS author,
+                       p.timestamp::text               AS timestamp,
+                       g.groupname                     AS group_name,
+                       g.id                            AS group_id,
+                       (
+                           SELECT COUNT(distinct pvv.username)
+                           FROM post_views pvv
+                           WHERE pvv.post_id = p.id
+                       )                               as unique_views,
+                       (
+                           SELECT COUNT(*)
+                           FROM post_views pvv
+                           WHERE pvv.post_id = p.id
+                             AND pvv.timestamp > NOW() - INTERVAL '60 min'
+                       )                               as views_last_hour,
+                       (
+                           SELECT COUNT(*)
+                           FROM post_views pvv
+                           WHERE pvv.post_id = p.id
+                       )                               as views
+                FROM posts p,
+                     users u,
+                     groups g
+                WHERE p.userid = u.id
+                  AND g.id = p.groupid
+                  AND g.id = $1
+                ORDER BY p.timestamp DESC
+                LIMIT 200)
             SELECT *
             FROM recent_posts
             ORDER BY timestamp DESC;

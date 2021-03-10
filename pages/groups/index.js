@@ -56,7 +56,6 @@ export default function Groups({ groups }) {
                         className={groupStyles.newGroupLink}>
                         New Group
                     </a>
-                    <p></p>
                     <div className={groupStyles.groupsContainer}>
                         {groups?.map((group, index) => (
                             <a
@@ -95,8 +94,9 @@ export async function getStaticProps() {
             FROM groups g,
                  posts p
             WHERE p.groupid = g.id
-              AND LENGTH(p.postcontent) > 250
-            GROUP BY g.id, g.groupname, g.groupdesc;
+            GROUP BY g.id, g.groupname, g.groupdesc
+            LIMIT 500
+            ;
         `
     )
     return {

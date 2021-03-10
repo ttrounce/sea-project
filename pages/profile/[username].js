@@ -134,7 +134,7 @@ const ProfilePage = ({ user, posts }) => {
                                                     ? 's'
                                                     : ''}
                                             </p>
-                                            <a href={'/posts/' + post.id}>
+                                            <a href={'/posts/' + post.post_id}>
                                                 Read
                                             </a>
                                         </>

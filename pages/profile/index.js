@@ -295,10 +295,7 @@ export default function Profile() {
 }
 
 const deleteUser = (userid) => {
-    return axios.post(
-        `${process.env.NEXT_PUBLIC_SELF_URL}/api/profile/delete_profile`,
-        {
-            userid: userid
-        }
-    )
+    return axios.post(`/api/profile/delete_profile`, {
+        userid: userid
+    })
 }

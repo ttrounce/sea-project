@@ -171,12 +171,22 @@ button.report_button:hover {
     margin: 0.5rem 0;
 }
 
+.shortPostsContent img {
+    display: none;
+}
+
 span.shortViewCount {
     float: right;
 }
 
+p.reportCount {
+    text-align: right;
+    color: crimson;
+    margin-top: 0;
+}
+
 a.groupTag {
-    background: lightcoral;
+    background: lightblue;
     border-radius: 0.3rem;
     padding: 0.3rem;
     margin: 0.3rem;

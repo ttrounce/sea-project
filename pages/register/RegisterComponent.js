@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import customStyles from '../../styles/custom.module.css'
+import { useRouter } from 'next/router'
 
 export default function Register() {
     const [username, setUsername] = useState('')
@@ -9,7 +10,7 @@ export default function Register() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
-
+    const router = useRouter()
     const [responseMessage, setResponse] = useState('')
     const [passwordMessage, setPasswordMessage] = useState('')
 
@@ -21,7 +22,7 @@ export default function Register() {
             return
         }
         axios
-            .post(`${process.env.NEXT_PUBLIC_SELF_URL}/api/register`, {
+            .post(`/api/register`, {
                 username: username,
                 firstname: firstname,
                 lastname: lastname,
@@ -31,6 +32,7 @@ export default function Register() {
             .then((res) => {
                 setResponse('Successfully registered')
             })
+            .then(() => router.push('/login'))
             .catch((err) => {
                 if (err.response.status == 422) {
                     if (err.response.data.type == 'validation') {

@@ -110,6 +110,13 @@ const PostPage = ({ post }) => {
                                     {post.uniqueViews} unique user
                                     {post.uniqueViews != 1 ? 's' : ''}
                                 </p>
+                                <p className={postStyles.reportCount}>
+                                    {post.reports != 0
+                                        ? `Reported by ${post.reports} user${
+                                              post.reports != 1 ? 's' : ''
+                                          }`
+                                        : ''}
+                                </p>
                                 <div className={postStyles.articleContent}>
                                     <ReactMarkdown renderers={renderers}>
                                         {post.body}
@@ -233,6 +240,13 @@ export async function getStaticProps({ params }) {
         `,
         [post.id]
     )
+
+    const { rows: reportedCount } = await pool.query(
+        `SELECT COUNT(distinct username)
+         FROM reported_posts
+         WHERE post_id = $1`,
+        [params.id]
+    )
     await pool.end()
     return {
         props: {
@@ -244,8 +258,9 @@ export async function getStaticProps({ params }) {
                 author_username: user.username,
                 timestamp: post.timestamp.toString(),
                 id: post.id,
-                views: totalViews[0].count,
-                uniqueViews: uniqueViews[0].count
+                views: totalViews[0]?.count,
+                uniqueViews: uniqueViews[0]?.count,
+                reports: reportedCount[0]?.count
             }
         },
         revalidate: 5

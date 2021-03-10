@@ -4,16 +4,17 @@ import { getDatabasePool } from '../../database/db-connect'
 import postStyles from '../../styles/post.module.css'
 import Navbar from '../../components/Navbar/Navbar'
 import { useSession } from 'next-auth/client'
+import ReactMarkdown from 'react-markdown'
 
 export default function Posts({ posts }) {
     const [session, loading] = useSession()
     if (loading) {
         return <></>
     }
-    const averageViews =
+    const averageViewsLastHour =
         posts.reduce(
             (previousValue, currentValue) =>
-                previousValue + Number(currentValue.views),
+                previousValue + Number(currentValue.views_last_hour),
             0
         ) / posts.length
     return (
@@ -79,16 +80,21 @@ export default function Posts({ posts }) {
                                     className={postStyles.shortViewCount}
                                     style={{
                                         color:
-                                            post.views > averageViews
+                                            post.views_last_hour >
+                                            averageViewsLastHour
                                                 ? 'forestgreen'
                                                 : 'darkorange'
                                     }}>
-                                    {post.views || 0} view
-                                    {post.views != 1 ? 's' : ''} in the last
-                                    hour
+                                    {post.views_last_hour || 0} view
+                                    {post.views_last_hour != 1 ? 's' : ''} in
+                                    the last hour
                                 </span>
                                 <h3>{post.post_title}</h3>
-                                <p>{post.post_body.slice(0, 250)}</p>
+                                <div className={postStyles.shortPostsContent}>
+                                    <ReactMarkdown>
+                                        {post.post_body.slice(0, 250)}
+                                    </ReactMarkdown>
+                                </div>
                                 <p>
                                     Written by {post.author} on{' '}
                                     {new Date(post.timestamp).toDateString()} at{' '}
@@ -113,30 +119,41 @@ export default function Posts({ posts }) {
 export async function getServerSideProps() {
     const pool = getDatabasePool()
     const { rows: posts } = await pool.query(`
-        WITH recent_posts AS (SELECT p.id                            AS post_id,
-                                     p.posttitle                     AS post_title,
-                                     p.postcontent                   AS post_body,
-                                     u.firstname || ' ' || u.surname AS author,
-                                     p.timestamp::text               AS timestamp,
-                                     g.groupname                     AS group_name,
-                                     g.id                            AS group_id,
-                                     COUNT(distinct pv.view_id)      as views,
-                                     COUNT(distinct pv.username)     as unique_views
-                              FROM posts p
-                                       LEFT JOIN
-                                   post_views pv ON p.id = pv.post_id,
-                                   users u,
-                                   groups g
-                              WHERE p.userid = u.id
-                                AND g.id = p.groupid
-                                AND pv.timestamp > NOW() - INTERVAL '60 min'
-                                AND LENGTH(p.postcontent) < 250
-                              GROUP BY p.id, post_title, post_body, author, p.timestamp, group_name, group_id
-                              ORDER BY p.timestamp DESC
-                              LIMIT 8)
+        WITH recent_posts AS (
+            SELECT p.id                            AS post_id,
+                   p.posttitle                     AS post_title,
+                   p.postcontent                   AS post_body,
+                   u.firstname || ' ' || u.surname AS author,
+                   p.timestamp::text               AS timestamp,
+                   g.groupname                     AS group_name,
+                   g.id                            AS group_id,
+                   (
+                       SELECT COUNT(distinct pvv.username)
+                       FROM post_views pvv
+                       WHERE pvv.post_id = p.id
+                   )                               as total_unique_views,
+                   (
+                       SELECT COUNT(*)
+                       FROM post_views pvv
+                       WHERE pvv.post_id = p.id
+                         AND pvv.timestamp > NOW() - INTERVAL '60 min'
+                   )                               as views_last_hour,
+                   (
+                       SELECT COUNT(*)
+                       FROM post_views pvv
+                       WHERE pvv.post_id = p.id
+                   )                               as views
+            FROM posts p,
+                 users u,
+                 groups g
+            WHERE p.userid = u.id
+              AND g.id = p.groupid
+              AND LENGTH(p.postcontent) < 250
+            ORDER BY p.timestamp DESC
+            LIMIT 20)
         SELECT *
         FROM recent_posts
-        ORDER BY views DESC;
+        ORDER BY views_last_hour DESC;
     `)
 
     await pool.end()

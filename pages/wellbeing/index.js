@@ -54,6 +54,9 @@ export default function Posts() {
                     <div className={styles.card}>
                         <a href="/wellbeing/quiz">Begin Quiz.</a>
                     </div>
+                    <div className={styles.card}>
+                        <a href="/groups/12">Wellbeing group</a>
+                    </div>
                 </main>
 
                 <footer className={styles.footer}>
