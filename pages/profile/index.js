@@ -153,7 +153,8 @@ export default function Profile() {
                                                 boxShadow: '0px 0px 0.2em gray',
                                                 borderRadius: '50%'
                                             }}
-                                            src={profilePicture}></img>
+                                            src={profilePicture}
+                                        />
                                     ) : (
                                         <svg
                                             style={{
@@ -218,7 +219,7 @@ export default function Profile() {
                                         if (confirmation) {
                                             deleteUser(user?.id).then(
                                                 async () => {
-                                                    signOut({redirect: false})
+                                                    signOut({ redirect: false })
                                                     await router.push('/', '/')
                                                 }
                                             )
@@ -233,7 +234,7 @@ export default function Profile() {
                                             'Do you want to log out?'
                                         )
                                         if (confirmation) {
-                                            signOut({redirect: false})
+                                            signOut({ redirect: false })
                                             await router.push('/')
                                         }
                                     }}>

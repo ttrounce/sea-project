@@ -56,7 +56,8 @@ const ProfilePage = ({ user, posts }) => {
                                         boxShadow: '0px 0px 0.2em gray',
                                         borderRadius: '50%'
                                     }}
-                                    src={profilePicture}></img>
+                                    src={profilePicture}
+                                />
                             ) : (
                                 <svg
                                     style={{
@@ -68,7 +69,7 @@ const ProfilePage = ({ user, posts }) => {
                                     width="128"
                                     height="128"
                                     xmlns="http://www.w3.org/2000/svg">
-                                    <g class="layer">
+                                    <g className="layer">
                                         <ellipse
                                             cx="64.18181"
                                             cy="109.04545"
@@ -77,7 +78,7 @@ const ProfilePage = ({ user, posts }) => {
                                             rx="43.36364"
                                             ry="43.36364"
                                             stroke="#000000"
-                                            stroke-width="5"
+                                            strokeWidth="5"
                                         />
                                         <ellipse
                                             cx="64.1875"
@@ -87,7 +88,7 @@ const ProfilePage = ({ user, posts }) => {
                                             rx="22.44887"
                                             ry="22.44887"
                                             stroke="#000000"
-                                            stroke-width="5"
+                                            strokeWidth="5"
                                         />
                                     </g>
                                 </svg>
