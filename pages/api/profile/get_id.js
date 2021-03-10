@@ -34,7 +34,6 @@ export default async (req, res) => {
             const result = await db
                 .one(getIdStatement)
                 .then((result) => {
-                    pgp.end()
                     res.status(200).json(result)
                 })
                 .catch((err) => {
