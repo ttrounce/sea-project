@@ -28,6 +28,7 @@ const NewGroup = ({ groups }) => {
                         <>
                             <Navbar
                                 content={[
+                                    { title: 'Articles', url: '/articles' },
                                     { title: 'Posts', url: '/posts' },
                                     { title: 'Groups', url: '/groups' },
                                     { title: 'Log In', url: '/login' },
@@ -40,6 +41,7 @@ const NewGroup = ({ groups }) => {
                         <>
                             <Navbar
                                 content={[
+                                    { title: 'Articles', url: '/articles' },
                                     { title: 'Posts', url: '/posts' },
                                     { title: 'Groups', url: '/groups' },
                                     { title: 'My Account', url: '/profile' }

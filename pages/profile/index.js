@@ -132,6 +132,7 @@ export default function Profile() {
                         </Head>
                         <Navbar
                             content={[
+                                { title: 'Articles', url: '/articles' },
                                 { title: 'Posts', url: '/posts' },
                                 { title: 'Groups', url: '/groups' },
                                 { title: 'My Account', url: '/profile/' }

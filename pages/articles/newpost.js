@@ -67,6 +67,7 @@ const PostPage = ({ groups }) => {
                 {session ? (
                     <Navbar
                         content={[
+                            { title: 'Articles', url: '/articles' },
                             { title: 'Posts', url: '/posts' },
                             { title: 'Groups', url: '/groups' },
                             { title: 'My Account', url: '/profile' }
@@ -75,6 +76,7 @@ const PostPage = ({ groups }) => {
                 ) : (
                     <Navbar
                         content={[
+                            { title: 'Articles', url: '/articles' },
                             { title: 'Posts', url: '/posts' },
                             { title: 'Groups', url: '/groups' },
                             { title: 'Log In', url: '/login' },
