@@ -218,7 +218,7 @@ export default function Profile() {
                                         if (confirmation) {
                                             deleteUser(user?.id).then(
                                                 async () => {
-                                                    signOut()
+                                                    signOut({redirect: false})
                                                     await router.push('/', '/')
                                                 }
                                             )
@@ -230,11 +230,11 @@ export default function Profile() {
                                     className={profileStyles.logout_button}
                                     onClick={async () => {
                                         const confirmation = confirm(
-                                            'Are you want to log out?'
+                                            'Do you want to log out?'
                                         )
                                         if (confirmation) {
-                                            signOut()
-                                            await router.push('/', '/')
+                                            signOut({redirect: false})
+                                            await router.push('/')
                                         }
                                     }}>
                                     Log out
