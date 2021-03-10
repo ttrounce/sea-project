@@ -34,7 +34,6 @@ export default async (req, res) => {
             const result = await db
                 .any(getUserStatement)
                 .then((result) => {
-                    pgp.end()
                     // If a result is found, send status 200 with relevant info in payload
                     res.status(200).json(result)
                 })
