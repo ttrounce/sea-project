@@ -85,9 +85,7 @@ const PostPage = ({ groups }) => {
                     />
                 )}
                 <main className={styles.main}>
-                    <h1 className={styles.title}>
-                        <a href={'/posts'}>Campus Connect Posts</a>
-                    </h1>
+                    <h1 className={styles.title}> Posts</h1>
 
                     <p className={styles.description}>Write a new post</p>
                     <article className={postStyles.post}>

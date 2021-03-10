@@ -77,9 +77,7 @@ const PostPage = ({ post }) => {
                     />
                 )}
                 <main className={styles.main}>
-                    <h1 className={styles.title}>
-                        <a href={'/posts'}>Campus Connect Posts</a>
-                    </h1>
+                    <h1 className={styles.title}> Posts</h1>
 
                     <p className={styles.description}>
                         View posts from other students

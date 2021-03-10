@@ -46,9 +46,7 @@ export default function Posts({ posts, group }) {
                     )}
                 </>
                 <main className={styles.main}>
-                    <h1 className={styles.title}>
-                        <a href={'/groups'}>Campus Connect Groups</a>
-                    </h1>
+                    <h1 className={styles.title}> Posts</h1>
 
                     <p className={styles.description}>
                         View posts in {group?.name}

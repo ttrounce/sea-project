@@ -11,9 +11,7 @@ export default function Terms() {
             </Head>
             <main className={styles.main}>
                 <div>
-                    <h1 className={styles.title}>
-                        <a href={'/'}>Campus Connect</a>
-                    </h1>
+                    <h1 className={styles.title}> {'Terms & Conditions'} </h1>
                     <div className={termsStyles.card}>
                         <div className={termsStyles.subtitle}>
                             Terms and Conditions

@@ -49,9 +49,7 @@ export default function LoginPage() {
                 </>
                 <main className={styles.main}>
                     <div className={styles.container}>
-                        <h1 className={styles.title}>
-                            <a href={'/'}>Campus Connect</a>
-                        </h1>
+                        <h1 className={styles.title}> Login</h1>
                         <>
                             {!session && (
                                 <>

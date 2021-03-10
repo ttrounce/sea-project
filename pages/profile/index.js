@@ -86,9 +86,7 @@ export default function Profile() {
                             ]}
                         />
                         <main className={styles.main}>
-                            <h1 className={styles.title}>
-                                <a href={'/'}>Campus Connect Profile</a>
-                            </h1>
+                            <h1 className={styles.title}> Profile</h1>
 
                             <p className={styles.description}>
                                 View your profile or browse other students

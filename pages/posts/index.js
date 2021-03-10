@@ -53,9 +53,7 @@ export default function Posts({ posts }) {
                     )}
                 </>
                 <main className={styles.main}>
-                    <h1 className={styles.title}>
-                        <a href={'/'}>Campus Connect</a>
-                    </h1>
+                    <h1 className={styles.title}> Posts</h1>
 
                     <p className={styles.description}>
                         View recently trending posts

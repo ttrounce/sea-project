@@ -211,10 +211,7 @@ export default function Wellbeing() {
                     )}
                 </>
                 <main className={styles.main}>
-                    <h1 className={styles.title}>
-                        {' '}
-                        <a href={'/'}>Campus Connect Wellbeing</a>
-                    </h1>
+                    <h1 className={styles.title}> Well-being Quiz</h1>
 
                     <p className={styles.description}>
                         Take a confidential well-being assessment, none of this

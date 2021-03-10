@@ -51,10 +51,7 @@ const NewGroup = ({ groups }) => {
                     )}
                 </>
                 <main className={styles.main}>
-                    <h1 className={styles.title}>
-                        {' '}
-                        <a href={'/'}>Campus Connect Groups</a>
-                    </h1>
+                    <h1 className={styles.title}> Groups</h1>
 
                     <p className={styles.description}>
                         Create a new group for articles

@@ -44,20 +44,17 @@ export default function Posts() {
                     )}
                 </>
                 <main className={styles.main}>
-                    <h1 className={styles.title}>
-                        {' '}
-                        <a href={'/'}>Campus Connect Wellbeing</a>
-                    </h1>
+                    <h1 className={styles.title}> Well-being</h1>
 
                     <p className={styles.description}>
-                        Take your Well-Being assessment now!
+                        Take your Well-being assessment now!
                     </p>
 
                     <div className={styles.card}>
                         <a href="/wellbeing/quiz">Begin Quiz.</a>
                     </div>
                     <div className={styles.card}>
-                        <a href="/groups/12">Wellbeing group</a>
+                        <a href="/groups/12">Well-being group</a>
                     </div>
                 </main>
 

@@ -48,9 +48,7 @@ export default function Login() {
                     )}
                 </>
                 <div className={styles.main}>
-                    <h1 className={styles.title}>
-                        <a href={'/'}>Campus Connect</a>
-                    </h1>
+                    <h1 className={styles.title}> Register</h1>
                     <p className={styles.description}>
                         Get started by registering! <br></br>
                         Already got an account? <a href={'/login'}>Log in.</a>

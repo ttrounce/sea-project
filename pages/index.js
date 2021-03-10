@@ -72,9 +72,9 @@ export default function Home() {
                                 </p>
                             </a>
                             <a className={indexStyles.tile} href={'/wellbeing'}>
-                                <h3>Well being</h3>
+                                <h3>Well-being</h3>
                                 <p>
-                                    Be mindful of your wellbeing to avoid
+                                    Be mindful of your well-being to avoid
                                     burnout and stress
                                 </p>
                             </a>
