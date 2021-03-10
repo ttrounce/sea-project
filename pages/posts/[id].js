@@ -245,8 +245,7 @@ export async function getStaticProps({ params }) {
                 id: post.id,
                 reports
             }
-        },
-        revalidate: 1
+        }
     }
 }
 

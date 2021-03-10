@@ -263,7 +263,7 @@ export async function getStaticProps({ params }) {
 export async function getStaticPaths() {
     const pool = getDatabasePool()
     const { rows } = await pool.query(
-        'SELECT username::text FROM users ORDER BY signup_date DESC LIMIT 10'
+        'SELECT username::text FROM users ORDER BY signup_date DESC LIMIT 1'
     )
     await pool.end()
     return {

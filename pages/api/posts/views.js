@@ -22,7 +22,7 @@ export default async (req, res) => {
             `,
             [post_id]
         )
-
+        await pool.end()
         res.status(200).json({
             views: totalViews[0].count,
             uniqueViews: uniqueViews[0].count,

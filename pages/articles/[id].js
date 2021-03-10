@@ -276,7 +276,7 @@ export async function getStaticProps({ params }) {
 export async function getStaticPaths() {
     const pool = getDatabasePool()
     const { rows } = await pool.query(
-        'SELECT CAST(id AS text) FROM posts ORDER BY timestamp DESC LIMIT 10'
+        'SELECT CAST(id AS text) FROM posts ORDER BY timestamp DESC LIMIT 1'
     )
     await pool.end()
     return {

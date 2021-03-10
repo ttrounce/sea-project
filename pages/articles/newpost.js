@@ -249,7 +249,7 @@ const submitPost = (title, content, user, group, post_id) => {
         })
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const { getDatabasePool } = require('../../database/db-connect')
     const pool = getDatabasePool()
     const { rows: groups } = await pool.query(
@@ -259,7 +259,6 @@ export async function getStaticProps() {
     return {
         props: {
             groups
-        },
-        revalidate: 1
+        }
     }
 }
