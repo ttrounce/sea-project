@@ -10,14 +10,15 @@ const ProfilePage = ({ user, posts }) => {
     const [profilePicture, setProfilePicture] = useState()
 
     if (!user) {
-        return <></>
+        return <>Cannot find user</>
     }
 
     useEffect(() => {
         axios
             .post('/api/proxy/profile_picture', { username: user.username })
             .then((res) => {
-                setProfilePicture(res.data.results[0].picture.large)
+                if (res.status === 200)
+                    setProfilePicture(res.data.results[0].picture.large)
             })
             .catch((err) => {
                 console.log('error: ' + err)
@@ -120,8 +121,10 @@ const ProfilePage = ({ user, posts }) => {
                     <h2>Recent posts by this user</h2>
                     {posts && posts.length > 0 ? (
                         <div className={profileStyles.recentPostsContainer}>
-                            {posts.map((post) => (
-                                <section className={profileStyles.profile}>
+                            {posts.map((post, index) => (
+                                <section
+                                    className={profileStyles.profile}
+                                    key={index}>
                                     {post.post_body.length > 250 ? (
                                         <>
                                             <h3>{post.post_title}</h3>
@@ -176,7 +179,7 @@ const ProfilePage = ({ user, posts }) => {
 }
 export default ProfilePage
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     if (params.username.length <= 0) return { notFound: true }
     const pool = getDatabasePool()
     const { rows: users, rowCount: userCount } = await pool.query(
@@ -255,20 +258,19 @@ export async function getStaticProps({ params }) {
                 ...post,
                 timestamp: post.timestamp.toString()
             }))
-        },
-        revalidate: 1
+        }
     }
 }
 
 // this gets a list of all the users
-export async function getStaticPaths() {
-    const pool = getDatabasePool()
-    const { rows } = await pool.query(
-        'SELECT username::text FROM users ORDER BY signup_date DESC LIMIT 1'
-    )
-    await pool.end()
-    return {
-        paths: rows.map((row) => ({ params: row })),
-        fallback: true
-    }
-}
+// export async function getStaticPaths() {
+//     const pool = getDatabasePool()
+//     const { rows } = await pool.query(
+//         'SELECT username::text FROM users ORDER BY signup_date DESC LIMIT 1'
+//     )
+//     await pool.end()
+//     return {
+//         paths: rows.map((row) => ({ params: row })),
+//         fallback: true
+//     }
+// }
