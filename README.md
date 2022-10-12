@@ -1,6 +1,6 @@
 ## Campus Connect
 
-[Live website](https://campusconnect.me)
+[Live website](https://campusconnect.me) (Inactive)
 
 This project is a social media study web app programmed in React, a JavaScript framework.
 
